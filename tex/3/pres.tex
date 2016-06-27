@@ -79,5 +79,72 @@ emphstyle={[2]\color{blue}}
 \end{frame}
 
 \section{Sequence Diagram}
+\subsection{Basics}
+\begin{frame}
+  \frametitle{Basics}
+  \begin{itemize}
+  		\item<+-> Define event sequences that result in some desired outcome
+		\item<+-> Focus is on the order in which messages occur
+		\item<+-> Vertical dimension: shows (top down) the time sequence of messages
+		\item<+-> Horizontal dimension: shows (left right) the objects involved in the messages communication
+  \end{itemize}
+\end{frame}
+
+\subsection{Lifeline}
+\begin{frame}
+	\frametitle{Lifeline}
+	\begin{center}
+		\includegraphics[scale=0.4]{box}
+	\end{center}
+	\textbf{Note:}
+	\begin{itemize}
+  			\item Drown as a box with a dashed line.
+  			\item Name is inside the box in the form $\Rightarrow$ instance/role name [optional] : Class Name
+  			\item Instances are underlined, role not.
+	\end{itemize}
+\end{frame}
+
+\subsection{Messages}
+\begin{frame}
+	\frametitle{Messages}
+	\begin{center}
+		\includegraphics[scale=0.35]{messages}
+	\end{center}
+	\textbf{Note:}
+	\begin{itemize}
+  			\item Messages depicted as arrowhead lines 
+  			\item Message name placed above the arrowed line
+  			\item Message sent on a receiving object is a method that the receiving object's class implements.
+  			\item Dotted arrowhead represent return value [optional]
+	\end{itemize}
+\end{frame}
+
+\subsection{Guards}
+\begin{frame}
+	\frametitle{Guards}
+	\begin{center}
+		\includegraphics[scale=0.35]{guards}
+	\end{center}
+	\textbf{Note:}
+	\begin{itemize}
+  			\item When a condition must be met for a message to be sent
+  			\item If some = 0 doIt() message is sent to B
+	\end{itemize}
+\end{frame}
+
+\subsection{Combined fragments}
+\begin{frame}
+	\frametitle{Combined fragments: alternatives / options / loops}
+	\begin{center}
+		\includegraphics[scale=0.25]{alt}
+	\end{center}
+	\textbf{Note:}
+	\begin{itemize}
+  			\item Used to group sets of messaged together to show conditional flow
+  			\item \textbf{Alternatives:} models if then else conditional with label ``alt'' and optional guards
+  			\item \textbf{Options:} models if then conditional with label ``opt''
+  			\item \textbf{Loops:} models a repetitive sequence with label ``loop'' and optional guard
+	\end{itemize}
+\end{frame}
 
 \end{document}
