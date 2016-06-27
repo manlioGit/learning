@@ -147,4 +147,51 @@ emphstyle={[2]\color{blue}}
 	\end{itemize}
 \end{frame}
 
+\section{Refactoring, First Example}
+\subsection{Description}
+\begin{frame}
+  \frametitle{Refactoring, First Example: description}
+  \begin{itemize}
+  		\item Rafactor an existing program that calculate and print a statement of a customer's charges in a video store
+		\item Program keeps track of customer's movies and for how long he rented
+		\item Charges depend on rent time and on movie's types (using renter points)
+  \end{itemize}
+\end{frame}
+
+\subsection{Classes}
+\begin{frame}
+  \frametitle{Classes}
+  \begin{itemize}
+  		\item Movie
+		\item Rental
+		\item Customer
+  \end{itemize}
+\end{frame}
+
+\subsection{Concepts}
+\begin{frame}
+  \frametitle{Concepts / Comments}
+  \begin{itemize}
+  		\item<+-> Is a simple program that don't change? It can works..does not really matter..
+		\item<+-> ..but if is a fragment of a more complex system.. we have problems!
+		\item<+-> ..and they arise when we want \textbf{to change} the program!
+		\item<+-> Compiler doesn't care about the code (actualy it can..).. humans care! (Remember Reeves?)
+		\item<+-> \textbf{Poorly designed systems are hard (i.e. expensive) to change}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{New Requirements}
+  \begin{itemize}
+  		\item Statement in html
+		\item New / Different charging rules
+		\item Change the way how users classify movies.. they don't know how yet!
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Rule}
+  If program's code is not structored in a convenient way to add a new feature.. first refactor then add the feature!
+\end{frame}
+
 \end{document}
