@@ -1,0 +1,13 @@
+withdraw money from an ATM
+
+Primary actors: customer, ATM technician, bank
+
+1. Bank customer inserts debit card and enters PIN
+2. Customer is validated 
+3. ATM displays actions available on ATM unit. Customer selects Withdraw Cash
+4. ATM prompts account
+5. Customer selects account
+6. ATM prompts amount
+7. Customer enters desired amount
+8. Information sent to Bank, inquiring if sufficient funds/allowable wuthdrawal limit
+9. Money is dispensed and receipt prints

@@ -7,3 +7,8 @@ pres.pdf
 *.gz
 *.toc
 .metadata
+bin/
+.classpath
+.project
+.settings/
+RemoteSystemsTempFiles/
