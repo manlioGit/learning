@@ -13,7 +13,7 @@
    height="1052.3622047"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.4 r9939"
+   inkscape:version="0.91 r13725"
    sodipodi:docname="communication.svg">
   <defs
      id="defs4">
@@ -68,13 +68,13 @@
      inkscape:pageshadow="2"
      inkscape:zoom="0.98994949"
      inkscape:cx="183.57609"
-     inkscape:cy="722.03051"
+     inkscape:cy="800.82241"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1680"
-     inkscape:window-height="1022"
-     inkscape:window-x="1680"
+     inkscape:window-width="1360"
+     inkscape:window-height="744"
+     inkscape:window-x="1366"
      inkscape:window-y="0"
      inkscape:window-maximized="1" />
   <metadata
@@ -85,7 +85,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -129,19 +129,16 @@
          id="tspan2989-7"
          x="321.91632"
          y="151.2249">:Controller</tspan></text>
-    <path
-       sodipodi:type="arc"
-       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+    <ellipse
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="path3039"
-       sodipodi:cx="623.2641"
-       sodipodi:cy="115.44569"
-       sodipodi:rx="14.142136"
-       sodipodi:ry="14.647212"
-       d="m 637.40623,115.44569 a 14.142136,14.647212 0 1 1 -28.28427,0 14.142136,14.647212 0 1 1 28.28427,0 z"
-       transform="translate(32,0)" />
+       cx="627.2641"
+       cy="117.44569"
+       rx="14.142136"
+       ry="14.647212" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 655.53783,130.09021 0.73644,39.39865"
+       d="m 628.99785,131.9824 -0.72358,39.50646"
        id="path3041"
        inkscape:connector-type="polyline"
        inkscape:connector-curvature="0"
@@ -149,39 +146,34 @@
        inkscape:connection-start-point="d4" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 635.06107,144.23504 36.36549,-1.01015"
+       d="m 611.06107,146.23504 36.36549,-1.01015"
        id="path3043"
        inkscape:connector-type="polyline"
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 638.09153,183.63099 656.27427,164.4381"
+       d="M 610.09153,185.63099 628.27427,166.4381"
        id="path3045"
        inkscape:connector-type="polyline"
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 672.43671,180.60054 -18.18274,-17.1726"
+       d="m 644.43671,182.60054 -18.18274,-17.1726"
        id="path3047"
        inkscape:connector-type="polyline"
        inkscape:connector-curvature="0" />
     <text
        xml:space="preserve"
-       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans Mono;-inkscape-font-specification:DejaVu Sans Mono"
-       x="616.09155"
-       y="202.82388"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:125%;font-family:'DejaVu Sans Mono';-inkscape-font-specification:'DejaVu Sans Mono';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="610.09155"
+       y="204.82388"
        id="text3049"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         id="tspan3051"
-         x="616.09155"
-         y="202.82388"
-         style="font-size:14px">Validation</tspan><tspan
-         sodipodi:role="line"
-         x="616.09155"
-         y="220.32388"
+         x="610.09155"
+         y="204.82388"
          id="tspan3053"
-         style="font-size:14px">  System</tspan></text>
+         style="font-size:14px">Bank</tspan></text>
     <rect
        style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.87127632;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        id="rect2985-6"
@@ -244,19 +236,19 @@
        inkscape:connector-curvature="0" />
     <text
        xml:space="preserve"
-       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans Mono;-inkscape-font-specification:DejaVu Sans Mono"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:125%;font-family:'DejaVu Sans Mono';-inkscape-font-specification:'DejaVu Sans Mono';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
        x="200.19295"
-       y="74.717262"
+       y="30.717262"
        id="text4327"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4329"
          x="200.19295"
-         y="74.717262"
+         y="30.717262"
          style="font-size:14px">1: read(card)</tspan><tspan
          sodipodi:role="line"
          x="200.19295"
-         y="92.217262"
+         y="48.217262"
          style="font-size:14px"
          id="tspan4331">2: read(pin)</tspan></text>
     <text
@@ -267,7 +259,7 @@
        id="text4352"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         id="tspan4354"></tspan></text>
+         id="tspan4354" /></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend)"
        d="m 503.56105,135.14367 37.37564,0"
@@ -276,16 +268,21 @@
        inkscape:connector-curvature="0" />
     <text
        xml:space="preserve"
-       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans Mono;-inkscape-font-specification:DejaVu Sans Mono"
-       x="457.28751"
-       y="121.84988"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:125%;font-family:'DejaVu Sans Mono';-inkscape-font-specification:'DejaVu Sans Mono';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="441.28751"
+       y="73.849876"
        id="text4327-6"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="457.28751"
-         y="121.84988"
+         x="441.28751"
+         y="73.849876"
          style="font-size:14px"
-         id="tspan4331-6">2: validate(customer)</tspan></text>
+         id="tspan4331-6">2: validate(customer)</tspan><tspan
+         sodipodi:role="line"
+         x="441.28751"
+         y="91.349876"
+         style="font-size:14px"
+         id="tspan4220">6.1: validate(customer, amount)</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1.00000095px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 383.20666,180.56336 0.65128,60.62599"
@@ -332,7 +329,7 @@
        inkscape:connector-curvature="0" />
     <text
        xml:space="preserve"
-       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans Mono;-inkscape-font-specification:DejaVu Sans Mono"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:125%;font-family:'DejaVu Sans Mono';-inkscape-font-specification:'DejaVu Sans Mono';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
        x="140.74426"
        y="269.65701"
        id="text4327-8"
@@ -341,28 +338,59 @@
          id="tspan4329-7"
          x="140.74426"
          y="269.65701"
-         style="font-size:14px">4: show(actions)</tspan><tspan
+         style="font-size:14px">3: show(actions)</tspan><tspan
          sodipodi:role="line"
          x="140.74426"
          y="287.15701"
          style="font-size:14px"
-         id="tspan4676">5.1: show(account)</tspan><tspan
+         id="tspan4676">4.1: show(account)</tspan><tspan
          sodipodi:role="line"
          x="140.74426"
          y="304.65701"
          style="font-size:14px"
+         id="tspan4216">5.1: promptAmount()</tspan><tspan
+         sodipodi:role="line"
+         x="140.74426"
+         y="322.15701"
+         style="font-size:14px"
          id="tspan4331-9" /></text>
     <text
        xml:space="preserve"
-       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans Mono;-inkscape-font-specification:DejaVu Sans Mono"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:125%;font-family:'DejaVu Sans Mono';-inkscape-font-specification:'DejaVu Sans Mono';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
        x="199.82043"
-       y="107.82346"
+       y="63.823463"
        id="text4327-8-2"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          x="199.82043"
-         y="107.82346"
+         y="63.823463"
          style="font-size:14px"
-         id="tspan4331-9-2">5: select(account)</tspan></text>
+         id="tspan4331-9-2">4: withdrawCash()</tspan><tspan
+         sodipodi:role="line"
+         x="199.82043"
+         y="81.323463"
+         style="font-size:14px"
+         id="tspan4214">5: select(account)</tspan><tspan
+         sodipodi:role="line"
+         x="199.82043"
+         y="98.823463"
+         style="font-size:14px"
+         id="tspan4218">6: insert(amount)</tspan><tspan
+         sodipodi:role="line"
+         x="199.82043"
+         y="116.32346"
+         style="font-size:14px"
+         id="tspan4201" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="551.60419"
+       y="300.72748"
+       id="text4224"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4226"
+         x="551.60419"
+         y="300.72748">6.2: supply(amount)</tspan></text>
   </g>
 </svg>
