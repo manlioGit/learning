@@ -52,12 +52,12 @@ emphstyle={[2]\color{blue}}
 \setbeamertemplate{navigation symbols}{}
 \setbeamerfont{subsection in toc}{size=\scriptsize}
 
-\title{Sequence Diagram + Refactoring chapter 1}
+\title{Refactoring chapter 1}
 \author{Manlio Modugno}
 \institute[GMTechnologies] 
 
-\date[30.06.2016] 
-{30.06.2016 - Sequence Diagram + Refactoring chapter 1}
+\date[19.07.2016] 
+{19.07.2016 - Refactoring chapter 1}
 
 \subject{}
 
@@ -130,6 +130,7 @@ emphstyle={[2]\color{blue}}
   \end{itemize}
 \end{frame}
 
+\section{Moves}
 \subsection{Moves}
 \begin{frame}
   \frametitle{First Step in Refactoring: attack statement method}
@@ -172,7 +173,7 @@ switch (each.getMovie().getPriceCode()) {
    \begin{itemize}
   		\item Identify any variables (local and parameters) local in scope of the code block. (each and thisAmount in the example)
 		\item Any not-modified variables can be passed as parameter to the extracted method
-		\item Modified variables need more care. In this case tisAmount is retuened from the extracted method
+		\item Modified variables need more care. In this case thisAmount is returned from the extracted method
 		\item ...		
 		\item Some IDEs offer automatic tool to apply some refactor moves
   \end{itemize}
@@ -250,6 +251,10 @@ code that humans can understand.''
 with Query}), but \textbf{don't optimize prematurely!} (more on that in next charpter)
 		\item Remember that sometime a temp variable (with good naming) can be useful
   \end{itemize}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+  \frametitle{Replace temp with query}
   \begin{lstlisting}
   	//thisAmount = each.getCharge()
 	...
@@ -279,12 +284,95 @@ with Query}), but \textbf{don't optimize prematurely!} (more on that in next cha
   \textbf{It is a bad idea to do a switch based on an attribute of another object (i.e. conditional block)}
      \begin{itemize}
   		\item move \textit{getCharge()} to \textit{Movie}
-  		\item Note also that code increase because of tech limit of Java (functional can do better here..)
-  		\item Don't bother (again) about performance.. we have to profile!
   	\end{itemize}
   	\begin{center}
-		\includegraphics[scale=0.5]{refactorApply}
+		\includegraphics[scale=0.3]{condPoly1}
 	\end{center}
 \end{frame}
+
+\begin{frame}
+  \frametitle{Replacing the Conditional Logic on Price Code with Polymorphism}
+     \begin{itemize}
+  		\item movie types $\Rightarrow$ Inheritance (warning!)
+  		\item A movie can change its classification during its lifetime.. an object cannot change its class!
+  		\item \textbf{state} vs \textbf{strategy} pattern $\Rightarrow$ Price is specialized!
+  		\item \textit{Replace Type Code with State/Strategy}
+  	\end{itemize}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+  \frametitle{Replacing the Conditional Logic on Price Code with Polymorphism}
+  \textbf{Abstract class Price with specializations}
+  \begin{lstlisting}
+ abstract class Price {
+   abstract int getPriceCode();
+ }
+ class ChildrensPrice extends Price {
+   int getPriceCode() {
+       return Movie.CHILDRENS;
+  }
+ }
+ class NewReleasePrice extends Price {
+   int getPriceCode() {
+       return Movie.NEW_RELEASE;
+  }
+ }
+ class RegularPrice extends Price {
+   int getPriceCode() {
+       return Movie.REGULAR;
+  }
+ }
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+  \frametitle{Replacing the Conditional Logic on Price Code with Polymorphism}
+  \textbf{Modify setter / getter in Movie}.. and apply \textit{Move Method} to getCharge()
+  \begin{lstlisting}
+ class Movie...
+   public int getPriceCode() { return _price.getPriceCode();}
+   public void setPriceCode(int arg) {
+       switch (arg) {
+         case REGULAR:
+          _price = new RegularPrice();
+         break;
+         case CHILDRENS:
+          _price = new ChildrensPrice();
+         break;
+         case NEW_RELEASE:
+          _price = new NewReleasePrice();
+         break;
+         default: throw new IllegalArgumentException("Incorrect Price Code");
+      }
+  }
+  private Price _price;
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+  \frametitle{Replacing the Conditional Logic on Price Code with Polymorphism}
+  \begin{itemize}
+  		\item Substitute one leg at a time of switch statement overriding method in specialized *Price class
+		\item ...once finished declare Price.getCharge as abstract (removing the switch statement!)
+		\item apply same approach to \textit{getFrequentRenterPoints}..
+  \end{itemize}
+  \begin{lstlisting}
+ class NewReleasePrice...
+     double getCharge(int daysRented){
+         return daysRented * 3;
+     }
+     ...
+	\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Replacing the Conditional Logic on Price Code with Polymorphism}
+  \textbf{Final structure}
+  	\begin{center}
+		\includegraphics[scale=0.3]{final}
+	\end{center}
+\end{frame}
+
 
 \end{document}
