@@ -1,0 +1,152 @@
+%
+% -- Manlio Modugno
+
+\documentclass{beamer} 
+\usepackage{eulervm}
+%\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{bold-extra}
+\usepackage{cancel}
+\usepackage{fancybox}
+\usepackage{soul}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amsmath}
+%\hypersetup{colorlinks=true,urlcolor=blue}
+
+\newcommand{\codefont}{\fontsize{6}{8}\selectfont}
+\lstset{language=[Sharp]C, 
+captionpos=b, 
+frame=lines,
+lineskip= 1pt, %space between lines
+basicstyle=\codefont, 
+keywordstyle=\color{blue}, 
+commentstyle=\color{green}, 
+stringstyle=\color{red}, 
+numbers=left, 
+numberstyle=\tiny, 
+stepnumber=2,
+numbersep=5pt,
+breaklines=true, 
+breakatwhitespace=false,
+showstringspaces=false,
+frame=single,
+tabsize=2,
+emph={double,bool,int,unsigned,char,true,false,void},
+emphstyle=\color{blue},
+emph={Assert,Test},
+emphstyle=\color{red},
+emph={[2]\using,\#define,\#ifdef,\#endif},
+emphstyle={[2]\color{blue}}
+}
+
+
+\mode<presentation>
+\definecolor{title_color}{RGB}{2,128,181} 
+\usetheme{Ilmenau}
+\usecolortheme[named=title_color]{structure}
+\setbeamercolor{palette quaternary}{use=structure,fg=black,bg=white} %header footer color
+\useoutertheme[subsection=false]{smoothbars}
+\setbeamercovered{transparent}
+\setbeamertemplate{navigation symbols}{}
+\setbeamerfont{subsection in toc}{size=\scriptsize}
+
+\title{Why Extends is Evil}
+\author{Manlio Modugno}
+\institute[GMTechnologies] 
+
+\date[29.07.2016] 
+{29.07.2016 - Why Extends is Evil}
+
+\subject{}
+
+\graphicspath{{img/}}
+\pgfdeclareimage[height=0.6cm]{mfg-logo}{img/mfgLogo}
+\logo{\pgfuseimage{mfg-logo}}
+
+%
+% Content start
+%
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Argomenti Trattati}
+  \tableofcontents
+\end{frame}
+
+\section{Why Extends is Evil}
+\subsection{abstract}
+\begin{frame}
+  \frametitle{abstract}
+  \begin{itemize}
+	\item<+-> Avoid \textit{extends} whenever possible... (or at least count untill 100 before to use it!)
+	\item<+-> Use interface inheritance! (i.e. program to interfaces)
+	\item<+-> Good designers write most of their code in terms of interfaces, not concrete base classes!
+  \end{itemize}
+\end{frame}
+
+\subsection{Losing flexibility}
+\begin{frame}
+  \frametitle{Losing flexibility}
+  \begin{itemize}
+  		\item<+-> Explicit use of concrete class names locks you(r mind) into specific implementations
+		\item<+-> \textbf{Parallel Design:} start programming \underline{before} before fully specify the problem, a \textit{design} (remember? design = code!) should not be necessarily complete before to start programming.
+		\item<+-> To apply parallel design we must have flexibility: \textbf{write your code in such a way that you can incorporate newly discovered requirements into the existing code as painlessly as possible}
+		\item<+-> Rather than implement features you might need, you implement only the features you definitely need, but in a way that accommodates change
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+	\frametitle{Losing flexibility}
+	A core concept to achieve flexibility is \textit{program to interfaces} \\
+	Consider following example where concrete class is used:
+	\begin{lstlisting}
+f()
+{   LinkedList list = new LinkedList();
+    //...
+    g( list );
+}
+g( LinkedList list )
+{
+    list.add( ... );
+    g2( list )
+}
+...
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+	\frametitle{Losing flexibility}
+	If \textbf{LinkedList} no more fits and we need an HashSet we need   \\
+	to change \underline{every} point in the code. Using interface we change just one point \\
+	\begin{lstlisting}
+f()
+{   Collection list = new LinkedList();
+    //...
+    g( list );
+}
+g( Collection list )
+{
+    list.add( ... );
+    g2( list )
+}
+...
+\end{lstlisting}
+\end{frame}
+
+\subsection{Coupling}
+\begin{frame}
+  \frametitle{Coupling}
+%  \begin{itemize}
+%  		\item<+-> Explicit use of concrete class names locks you(r mind) into specific implementations
+%		\item<+-> \textbf{Parallel Design:} start programming \underline{before} before fully specify the problem, a \textit{design} (remember? design = code!) should not be necessarily complete before to start programming.
+%		\item<+-> To apply parallel design we must have flexibility: \textbf{write your code in such a way that you can incorporate newly discovered requirements into the existing code as painlessly as possible}
+%		\item<+-> Rather than implement features you might need, you implement only the features you definitely need, but in a way that accommodates change
+%  \end{itemize}
+\end{frame}
+
+\end{document}
