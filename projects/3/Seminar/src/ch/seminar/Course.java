@@ -1,8 +1,7 @@
 package ch.seminar;
 
-import static ch.seminar.util.Format.line;
-
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class Course {
@@ -52,16 +51,7 @@ public class Course {
 		}
 	}
 
-	public String render() {
-		String studentList = "";
-		for (Student student : _students) {
-			studentList += line(student.getFullName());
-		}
-		return line(getName() + " " + getNumber() + ": " + getDescription()) +
-			   line("location: " + getLocation()) +
-			   line("seats left: " + getSeatsLeft()) +
-			   line("") +
-			   line("Enrollment:") +
-			   studentList;
+	public Collection<Student> getStudents() {
+		return _students;
 	}
 }

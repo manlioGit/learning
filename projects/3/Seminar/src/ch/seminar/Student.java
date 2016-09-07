@@ -12,6 +12,14 @@ public class Student {
 	}
 	
 	public String getFullName(){
-		return _firstName + " " + _lastName;
+		return getFirstName() + " " + getLastName();
+	}
+
+	public String getFirstName() {
+		return _firstName;
+	}
+
+	public String getLastName() {
+		return _lastName;
 	}
 }

@@ -141,12 +141,169 @@ g( Collection list )
 \subsection{Coupling}
 \begin{frame}
   \frametitle{Coupling}
-%  \begin{itemize}
-%  		\item<+-> Explicit use of concrete class names locks you(r mind) into specific implementations
-%		\item<+-> \textbf{Parallel Design:} start programming \underline{before} before fully specify the problem, a \textit{design} (remember? design = code!) should not be necessarily complete before to start programming.
-%		\item<+-> To apply parallel design we must have flexibility: \textbf{write your code in such a way that you can incorporate newly discovered requirements into the existing code as painlessly as possible}
-%		\item<+-> Rather than implement features you might need, you implement only the features you definitely need, but in a way that accommodates change
-%  \end{itemize}
+  \begin{itemize}
+  		\item<+-> Inheritance has strong coupling (i.e. ``undesirable reliance of one part of a program on another part'')
+		\item<+-> \textbf{Global variables(!)} are strongest example of coupling! 
+		\item<+-> As designer, we should strive to minimize coupling relationships.
+		\item<+-> ..of course we must have some loose coupling.. but
+		\item<+-> ``the most important (OO rule) is that the implementation of an object should be completely hidden from the objects that use it'' $\Rightarrow$ to minimize coupling
+		\item<+-> Direct exp: ``I don't have time to rewrite programs, so I follow the rules. My concern is entirely practical. I have no interest in purity for the sake of purity.''
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{the fragile base-class problem}
+  \begin{itemize}
+  \item<+-> A change in a base class impacts all the hierarchy! 
+  \item<+-> We should check every class coupled with the base one..
+  \item<+-> ..and every class that uses Base o derived!
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}[containsverbatim]
+	\frametitle{the fragile base-class problem}
+	Stack implemented inherinting from ArrayList   \\
+	A user using any derived method from ArrayList can have big surprises! (i.e. clear)\\
+	\begin{lstlisting}
+class Stack extends ArrayList
+{   private int stack_pointer = 0;
+    public void push( Object article )
+    {   add( stack_pointer++, article );
+    }
+    public Object pop()
+    {   return remove( --stack_pointer );
+    }
+    public void push_many( Object[] articles )
+    {   for( int i = 0; i < articles.length; ++i )
+            push( articles[i] );
+    }
+}
+...
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}
+  \frametitle{the fragile base-class problem}
+  \begin{itemize}
+  \item<+-> A solution is to redefine all the inherited methods..
+  \item<+-> ..pain in the ass .. maybe you should use an interface!
+  \item<+-> ..and if you throw exceptions to not supported method you break LSP and you move error prone behaviour
+  from compile time to run time! 
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+	\frametitle{the fragile base-class problem}
+	A better solution is to encapsulate the data structure   \\
+	\begin{lstlisting}
+class Stack
+{   private int stack_pointer = 0;
+    private ArrayList the_data = new ArrayList();
+    public void push( Object article )
+    {   the_data.add( stack_pointer++, article );
+    }
+    public Object pop()
+    {   return the_data.remove( --stack_pointer );
+    }
+    public void push_many( Object[] articles )
+    {   for( int i = 0; i < o.length; ++i )
+            push( articles[i] );
+    }
+}
+...
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+	\frametitle{the fragile base-class problem}
+	Very good!.. but one day someone(even yourself) create a variant of the Stack   \\
+	\begin{lstlisting}
+class Monitorable_stack extends Stack
+{
+    private int high_water_mark = 0;
+    private int current_size;
+    public void push( Object article )
+    {   if( ++current_size > high_water_mark )
+            high_water_mark = current_size;
+        super.push(article);
+    }
+    
+    public Object pop()
+    {   --current_size;
+        return super.pop();
+    }
+    public int maximum_size_so_far()
+    {   return high_water_mark;
+    }
+}
+...
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+	\frametitle{the fragile base-class problem}
+	And one fine day someone(again even yourself).. modifies internal implementation of the base class..   \\
+	\begin{lstlisting}
+class Stack
+{   private int stack_pointer = -1;
+    private Object[] stack = new Object[1000];
+    public void push( Object article )
+    {   assert stack_pointer < stack.length;
+        stack[ ++stack_pointer ] = article;
+    }
+    public Object pop()
+    {   assert stack_pointer >= 0;
+        return stack[ stack_pointer-- ];
+    }
+    public void push_many( Object[] articles )
+    {   assert (stack_pointer + articles.length) < stack.length;
+        System.arraycopy(articles, 0, stack, stack_pointer+1,
+                                                articles.length);
+        stack_pointer += articles.length;
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}
+  \frametitle{the fragile base-class problem}
+  \begin{itemize}
+  \item<+-> pushmany no more call push to accomplish his task... we have a problem!
+  \item<+-> Derived class Monitorablestack no more track water marker..
+  \item<+-> ..there is no solution to these kind of problems...  
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+	\frametitle{the fragile base-class problem}
+	..but you can avoide them using interfaces!   \\
+	\begin{lstlisting}
+interface Stack{
+	void push( Object o );
+	Object pop();
+	void push_many( Object[] source );
+}
+
+class Simple_stack implements Stack{   
+	private int stack_pointer = -1;
+	private Object[] stack = new Object[1000];
+	...
+}
+class Monitorable_Stack implements Stack{
+    private int high_water_mark = 0;
+    private int current_size;
+    Simple_stack stack = new Simple_stack();
+    ...
+}
+
+\end{lstlisting}
+\end{frame}
+\subsection{Frameworks}
+\begin{frame}
+  \frametitle{Frameworks}
+  \textbf{Pay attention to frameworks.. they try to realize the \textit{final solution}}..  maybe they are not so good for your needs (even when they are member of nobility..) \\
+
 \end{frame}
 
 \end{document}

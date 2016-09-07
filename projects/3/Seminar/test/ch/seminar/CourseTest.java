@@ -1,6 +1,5 @@
 package ch.seminar;
 
-import static ch.seminar.util.Format.line;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
@@ -36,22 +35,4 @@ public class CourseTest {
 	        assertThat(rte.getMessage(), is("Student: c d can't be enrolled. Seats terminated"));
 	    }
 	}
-	
-	@Test
-	public void courseRenderItSelf() {
-		
-		_course.enroll(new Student("xxx", "yyy"));
-		
-		assertThat(_course.render(), 
-						is(
-							line("name 1: description") +
-							line("location: somewhere") +
-							line("seats left: 0") +
-							line("") +
-							line("Enrollment:") +
-							line("xxx yyy") 
-						)
-				);
-	}
-
 }
