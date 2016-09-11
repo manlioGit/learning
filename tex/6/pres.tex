@@ -1,0 +1,354 @@
+%
+% -- Manlio Modugno
+
+\documentclass{beamer} 
+\usepackage{eulervm}
+%\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{bold-extra}
+\usepackage{cancel}
+\usepackage{fancybox}
+\usepackage{soul}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amsmath}
+%\hypersetup{colorlinks=true,urlcolor=blue}
+
+\newcommand{\codefont}{\fontsize{6}{8}\selectfont}
+\lstset{language=[Sharp]C, 
+captionpos=b, 
+frame=lines,
+lineskip= 1pt, %space between lines
+basicstyle=\codefont, 
+keywordstyle=\color{blue}, 
+commentstyle=\color{green}, 
+stringstyle=\color{red}, 
+numbers=left, 
+numberstyle=\tiny, 
+stepnumber=2,
+numbersep=5pt,
+breaklines=true, 
+breakatwhitespace=false,
+showstringspaces=false,
+frame=single,
+tabsize=2,
+emph={double,bool,int,unsigned,char,true,false,void},
+emphstyle=\color{blue},
+emph={Assert,Test},
+emphstyle=\color{red},
+emph={[2]\using,\#define,\#ifdef,\#endif},
+emphstyle={[2]\color{blue}}
+}
+
+
+\mode<presentation>
+\definecolor{title_color}{RGB}{2,128,181} 
+\usetheme{Ilmenau}
+\usecolortheme[named=title_color]{structure}
+\setbeamercolor{palette quaternary}{use=structure,fg=black,bg=white} %header footer color
+\useoutertheme[subsection=false]{smoothbars}
+\setbeamercovered{transparent}
+\setbeamertemplate{navigation symbols}{}
+\setbeamerfont{subsection in toc}{size=\scriptsize}
+
+\title{Why Extends is Evil}
+\author{Manlio Modugno}
+\institute[GMTechnologies] 
+
+\date[15.09.2016] 
+{15.09.2016 - Principles in Refactoring}
+
+\subject{}
+
+\graphicspath{{img/}}
+\pgfdeclareimage[height=0.6cm]{mfg-logo}{img/mfgLogo}
+\logo{\pgfuseimage{mfg-logo}}
+
+%
+% Content start
+%
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Argomenti Trattati}
+  \tableofcontents
+\end{frame}
+
+\section{Principles in Refactoring}
+\subsection{Defining Refactoring}
+\begin{frame}
+  \frametitle{Defining Refactoring (Definition)}
+  \begin{itemize}
+	\item<+-> as noun: ``a change made to the internal structure of software to make it 
+\textbf{easier to understand} and \textbf{cheaper to modify} without changing its observable behavior''
+	\item<+-> as verb: ``to restructure software by applying a series of refactorings without changing its observable behavior''
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{The Two Hats}
+  \begin{itemize}
+  		\item<+-> While you develop, you divide your time between adding functions and refactoring
+		\item<+-> When you add function, you shouldn't be changing existing code; you are just adding 
+new capabilities
+		\item<+-> When you refactor, you make a point of not adding function; you only restructure the code
+		\item<+-> ...as you develop you swap hat frequently
+		\item<+-> Refactor it's not the cure for all software ills.. however It's a valuable tool for several things.. 		
+  \end{itemize}
+\end{frame}
+
+\section{Why should you refactor?}
+\subsection{Refactoring Improves the Design of Software}
+\begin{frame}
+  \frametitle{Why should you refactor? \textbf{Refactoring Improves the Design of Software}} 
+  \begin{itemize}
+  		\item<+-> Without refactor, as people change code, the code lose its stucture..
+		\item<+-> ..it becomes harder to see the design by reading the code.. 
+		\item<+-> .. so it becomes harder to preserve it.. 
+		\item<+-> ...a bad loop that brings code to collapse. 
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Why should you refactor? \textbf{Refactoring Improves the Design of Software}} 
+  \begin{itemize}
+  		\item<+-> \textbf{Poorly designed code usually takes more code to do the same things}
+		\item<+-> ..design improvement strictly related to duplication removal!
+		\item<+-> \textbf{Reducing amount of the code} facilitates code modification
+		\item<+-> ``The more code there is, the harder it is to modify correctly. There's more code to understand ''
+		\item<+-> When code says everything once and only once we have essence of good design
+  \end{itemize}
+\end{frame}
+
+\subsection{Refactoring Makes Software Easier to Understand}
+\begin{frame}
+  \frametitle{Why should you refactor? \textbf{Refactoring Makes Software Easier to Understand}} 
+  \begin{itemize}
+  		\item<+-> Programming is like a conversation between you and a computer..
+		\item<+-> ..you give an high-level specification to a pc and It does what you say (hopefully!)
+		\item<+-> ..but your code is also read by other people (..and from you in different points in time..)
+		\item<+-> when we write code we must think to future developers that will read that code!
+		\item<+-> Refactoring helps to keep code more readable..
+  \end{itemize}
+\end{frame}
+
+\subsection{Refactoring Makes Software Easier to Understand}
+\begin{frame}
+  \frametitle{Why should you refactor? \textbf{Refactoring Helps You Find Bugs}} 
+  \begin{itemize}
+  		\item<+-> 
+		
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+	\frametitle{Losing flexibility}
+	A core concept to achieve flexibility is \textit{program to interfaces} \\
+	Consider following example where concrete class is used:
+	\begin{lstlisting}
+f()
+{   LinkedList list = new LinkedList();
+    //...
+    g( list );
+}
+g( LinkedList list )
+{
+    list.add( ... );
+    g2( list )
+}
+...
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+	\frametitle{Losing flexibility}
+	If \textbf{LinkedList} no more fits and we need an HashSet we need   \\
+	to change \underline{every} point in the code. Using interface we change just one point \\
+	\begin{lstlisting}
+f()
+{   Collection list = new LinkedList();
+    //...
+    g( list );
+}
+g( Collection list )
+{
+    list.add( ... );
+    g2( list )
+}
+...
+\end{lstlisting}
+\end{frame}
+
+\subsection{Coupling}
+\begin{frame}
+  \frametitle{Coupling}
+  \begin{itemize}
+  		\item<+-> Inheritance has strong coupling (i.e. ``undesirable reliance of one part of a program on another part'')
+		\item<+-> \textbf{Global variables(!)} are strongest example of coupling! 
+		\item<+-> As designer, we should strive to minimize coupling relationships.
+		\item<+-> ..of course we must have some loose coupling.. but
+		\item<+-> ``the most important (OO rule) is that the implementation of an object should be completely hidden from the objects that use it'' $\Rightarrow$ to minimize coupling
+		\item<+-> Direct exp: ``I don't have time to rewrite programs, so I follow the rules. My concern is entirely practical. I have no interest in purity for the sake of purity.''
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{the fragile base-class problem}
+  \begin{itemize}
+  \item<+-> A change in a base class impacts all the hierarchy! 
+  \item<+-> We should check every class coupled with the base one..
+  \item<+-> ..and every class that uses Base o derived!
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}[containsverbatim]
+	\frametitle{the fragile base-class problem}
+	Stack implemented inherinting from ArrayList   \\
+	A user using any derived method from ArrayList can have big surprises! (i.e. clear)\\
+	\begin{lstlisting}
+class Stack extends ArrayList
+{   private int stack_pointer = 0;
+    public void push( Object article )
+    {   add( stack_pointer++, article );
+    }
+    public Object pop()
+    {   return remove( --stack_pointer );
+    }
+    public void push_many( Object[] articles )
+    {   for( int i = 0; i < articles.length; ++i )
+            push( articles[i] );
+    }
+}
+...
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}
+  \frametitle{the fragile base-class problem}
+  \begin{itemize}
+  \item<+-> A solution is to redefine all the inherited methods..
+  \item<+-> ..pain in the ass .. maybe you should use an interface!
+  \item<+-> ..and if you throw exceptions to not supported method you break LSP and you move error prone behaviour
+  from compile time to run time! 
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+	\frametitle{the fragile base-class problem}
+	A better solution is to encapsulate the data structure   \\
+	\begin{lstlisting}
+class Stack
+{   private int stack_pointer = 0;
+    private ArrayList the_data = new ArrayList();
+    public void push( Object article )
+    {   the_data.add( stack_pointer++, article );
+    }
+    public Object pop()
+    {   return the_data.remove( --stack_pointer );
+    }
+    public void push_many( Object[] articles )
+    {   for( int i = 0; i < o.length; ++i )
+            push( articles[i] );
+    }
+}
+...
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+	\frametitle{the fragile base-class problem}
+	Very good!.. but one day someone(even yourself) create a variant of the Stack   \\
+	\begin{lstlisting}
+class Monitorable_stack extends Stack
+{
+    private int high_water_mark = 0;
+    private int current_size;
+    public void push( Object article )
+    {   if( ++current_size > high_water_mark )
+            high_water_mark = current_size;
+        super.push(article);
+    }
+    
+    public Object pop()
+    {   --current_size;
+        return super.pop();
+    }
+    public int maximum_size_so_far()
+    {   return high_water_mark;
+    }
+}
+...
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+	\frametitle{the fragile base-class problem}
+	And one fine day someone(again even yourself).. modifies internal implementation of the base class..   \\
+	\begin{lstlisting}
+class Stack
+{   private int stack_pointer = -1;
+    private Object[] stack = new Object[1000];
+    public void push( Object article )
+    {   assert stack_pointer < stack.length;
+        stack[ ++stack_pointer ] = article;
+    }
+    public Object pop()
+    {   assert stack_pointer >= 0;
+        return stack[ stack_pointer-- ];
+    }
+    public void push_many( Object[] articles )
+    {   assert (stack_pointer + articles.length) < stack.length;
+        System.arraycopy(articles, 0, stack, stack_pointer+1,
+                                                articles.length);
+        stack_pointer += articles.length;
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}
+  \frametitle{the fragile base-class problem}
+  \begin{itemize}
+  \item<+-> pushmany no more call push to accomplish his task... we have a problem!
+  \item<+-> Derived class Monitorablestack no more track water marker..
+  \item<+-> ..there is no solution to these kind of problems...  
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+	\frametitle{the fragile base-class problem}
+	..but you can avoide them using interfaces!   \\
+	\begin{lstlisting}
+interface Stack{
+	void push( Object o );
+	Object pop();
+	void push_many( Object[] source );
+}
+
+class Simple_stack implements Stack{   
+	private int stack_pointer = -1;
+	private Object[] stack = new Object[1000];
+	...
+}
+class Monitorable_Stack implements Stack{
+    private int high_water_mark = 0;
+    private int current_size;
+    Simple_stack stack = new Simple_stack();
+    ...
+}
+
+\end{lstlisting}
+\end{frame}
+\subsection{Frameworks}
+\begin{frame}
+  \frametitle{Frameworks}
+  \textbf{Pay attention to frameworks.. they try to realize the \textit{final solution}}..  maybe they are not so good for your needs (even when they are member of nobility..) \\
+
+\end{frame}
+
+\end{document}
