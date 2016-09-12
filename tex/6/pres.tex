@@ -136,219 +136,69 @@ new capabilities
   \end{itemize}
 \end{frame}
 
-\subsection{Refactoring Makes Software Easier to Understand}
+\subsection{Refactoring Helps You Find Bugs}
 \begin{frame}
   \frametitle{Why should you refactor? \textbf{Refactoring Helps You Find Bugs}} 
   \begin{itemize}
-  		\item<+-> 
-		
+  		\item<+-> When you understand the code, you spot bugs
+  		\item<+-> Refactoring force you to deeply understand the code
   \end{itemize}
 \end{frame}
 
-\begin{frame}[containsverbatim]
-	\frametitle{Losing flexibility}
-	A core concept to achieve flexibility is \textit{program to interfaces} \\
-	Consider following example where concrete class is used:
-	\begin{lstlisting}
-f()
-{   LinkedList list = new LinkedList();
-    //...
-    g( list );
-}
-g( LinkedList list )
-{
-    list.add( ... );
-    g2( list )
-}
-...
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[containsverbatim]
-	\frametitle{Losing flexibility}
-	If \textbf{LinkedList} no more fits and we need an HashSet we need   \\
-	to change \underline{every} point in the code. Using interface we change just one point \\
-	\begin{lstlisting}
-f()
-{   Collection list = new LinkedList();
-    //...
-    g( list );
-}
-g( Collection list )
-{
-    list.add( ... );
-    g2( list )
-}
-...
-\end{lstlisting}
-\end{frame}
-
-\subsection{Coupling}
+\subsection{Refactoring Helps You Program Faster}
 \begin{frame}
-  \frametitle{Coupling}
+  \frametitle{Why should you refactor? \textbf{Refactoring Helps You Program Faster}} 
   \begin{itemize}
-  		\item<+-> Inheritance has strong coupling (i.e. ``undesirable reliance of one part of a program on another part'')
-		\item<+-> \textbf{Global variables(!)} are strongest example of coupling! 
-		\item<+-> As designer, we should strive to minimize coupling relationships.
-		\item<+-> ..of course we must have some loose coupling.. but
-		\item<+-> ``the most important (OO rule) is that the implementation of an object should be completely hidden from the objects that use it'' $\Rightarrow$ to minimize coupling
-		\item<+-> Direct exp: ``I don't have time to rewrite programs, so I follow the rules. My concern is entirely practical. I have no interest in purity for the sake of purity.''
+  		\item<+-> Counterintuitive at first..but a good design is essential for rapid development!
+  		\item<+-> A poor design slow quickly down.. find \& fix bugs, changes take longer
+  		\item<+-> A good design maintains speed in software development..rafctoring prevent system to decay
   \end{itemize}
 \end{frame}
 
+\section{When You Should Refactor?}
+\subsection{Intro}
 \begin{frame}
-  \frametitle{the fragile base-class problem}
+  \frametitle{When You Should Refactor?(Intro)} 
   \begin{itemize}
-  \item<+-> A change in a base class impacts all the hierarchy! 
-  \item<+-> We should check every class coupled with the base one..
-  \item<+-> ..and every class that uses Base o derived!
+  		\item<+-> Do refactoring all the time in \textbf{little} bursts
+  		\item<+-> You refactor because you want to do something else, and refactor helps to accomplish it
   \end{itemize}
 \end{frame}
 
-
-\begin{frame}[containsverbatim]
-	\frametitle{the fragile base-class problem}
-	Stack implemented inherinting from ArrayList   \\
-	A user using any derived method from ArrayList can have big surprises! (i.e. clear)\\
-	\begin{lstlisting}
-class Stack extends ArrayList
-{   private int stack_pointer = 0;
-    public void push( Object article )
-    {   add( stack_pointer++, article );
-    }
-    public Object pop()
-    {   return remove( --stack_pointer );
-    }
-    public void push_many( Object[] articles )
-    {   for( int i = 0; i < articles.length; ++i )
-            push( articles[i] );
-    }
-}
-...
-\end{lstlisting}
-\end{frame}
-
+\subsection{When You Add a Function}
 \begin{frame}
-  \frametitle{the fragile base-class problem}
+  \frametitle{When You Should Refactor? When You Add a Function} 
   \begin{itemize}
-  \item<+-> A solution is to redefine all the inherited methods..
-  \item<+-> ..pain in the ass .. maybe you should use an interface!
-  \item<+-> ..and if you throw exceptions to not supported method you break LSP and you move error prone behaviour
-  from compile time to run time! 
+  		\item<+-> When a new function is needed a refactor helps to understand / clarifiy code 
+  		\item<+-> ..and to insert the new function easily
   \end{itemize}
-\end{frame}
-
-\begin{frame}[containsverbatim]
-	\frametitle{the fragile base-class problem}
-	A better solution is to encapsulate the data structure   \\
-	\begin{lstlisting}
-class Stack
-{   private int stack_pointer = 0;
-    private ArrayList the_data = new ArrayList();
-    public void push( Object article )
-    {   the_data.add( stack_pointer++, article );
-    }
-    public Object pop()
-    {   return the_data.remove( --stack_pointer );
-    }
-    public void push_many( Object[] articles )
-    {   for( int i = 0; i < o.length; ++i )
-            push( articles[i] );
-    }
-}
-...
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[containsverbatim]
-	\frametitle{the fragile base-class problem}
-	Very good!.. but one day someone(even yourself) create a variant of the Stack   \\
-	\begin{lstlisting}
-class Monitorable_stack extends Stack
-{
-    private int high_water_mark = 0;
-    private int current_size;
-    public void push( Object article )
-    {   if( ++current_size > high_water_mark )
-            high_water_mark = current_size;
-        super.push(article);
-    }
-    
-    public Object pop()
-    {   --current_size;
-        return super.pop();
-    }
-    public int maximum_size_so_far()
-    {   return high_water_mark;
-    }
-}
-...
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[containsverbatim]
-	\frametitle{the fragile base-class problem}
-	And one fine day someone(again even yourself).. modifies internal implementation of the base class..   \\
-	\begin{lstlisting}
-class Stack
-{   private int stack_pointer = -1;
-    private Object[] stack = new Object[1000];
-    public void push( Object article )
-    {   assert stack_pointer < stack.length;
-        stack[ ++stack_pointer ] = article;
-    }
-    public Object pop()
-    {   assert stack_pointer >= 0;
-        return stack[ stack_pointer-- ];
-    }
-    public void push_many( Object[] articles )
-    {   assert (stack_pointer + articles.length) < stack.length;
-        System.arraycopy(articles, 0, stack, stack_pointer+1,
-                                                articles.length);
-        stack_pointer += articles.length;
-    }
-}
-\end{lstlisting}
-\end{frame}
-
+\end{frame}  
+  
+\subsection{When You Need to Fix a Bug}
 \begin{frame}
-  \frametitle{the fragile base-class problem}
+  \frametitle{When You Should Refactor? When You Need to Fix a Bug} 
   \begin{itemize}
-  \item<+-> pushmany no more call push to accomplish his task... we have a problem!
-  \item<+-> Derived class Monitorablestack no more track water marker..
-  \item<+-> ..there is no solution to these kind of problems...  
+  		\item<+-> A cleaner code helps to spot bugs..
   \end{itemize}
 \end{frame}
 
-\begin{frame}[containsverbatim]
-	\frametitle{the fragile base-class problem}
-	..but you can avoide them using interfaces!   \\
-	\begin{lstlisting}
-interface Stack{
-	void push( Object o );
-	Object pop();
-	void push_many( Object[] source );
-}
-
-class Simple_stack implements Stack{   
-	private int stack_pointer = -1;
-	private Object[] stack = new Object[1000];
-	...
-}
-class Monitorable_Stack implements Stack{
-    private int high_water_mark = 0;
-    private int current_size;
-    Simple_stack stack = new Simple_stack();
-    ...
-}
-
-\end{lstlisting}
-\end{frame}
-\subsection{Frameworks}
+\subsection{As You Do Code Review}
 \begin{frame}
-  \frametitle{Frameworks}
-  \textbf{Pay attention to frameworks.. they try to realize the \textit{final solution}}..  maybe they are not so good for your needs (even when they are member of nobility..) \\
-
+  \frametitle{When You Should Refactor? As You Do Code Review} 
+  \begin{itemize}
+  		\item<+-> Code review helps knowledge spreading and a re-check of the targets..
+  		\item<+-> .. a new point of view can enhance the code.. refactor!
+  \end{itemize}
 \end{frame}
 
+\section{Problems With Refactoring}
+\subsection{Intro}
+\begin{frame}
+  \frametitle{Problems With Refactoring} 
+  \begin{itemize}
+  		\item<+-> ...don't fall in the white rabbit's hole!..
+  		\item<+-> .. always evaluate deadlines.. 
+  		\item<+-> ..make more little refactors to accomplish a bigger one later..
+  \end{itemize}
+\end{frame}
 \end{document}
