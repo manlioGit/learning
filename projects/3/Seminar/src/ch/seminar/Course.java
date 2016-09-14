@@ -1,7 +1,6 @@
 package ch.seminar;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class Course {
@@ -20,7 +19,7 @@ public class Course {
 		_number = number;
 		_location = location;
 		_totalSeats = totalSeats;
-		_students = new ArrayList<>();
+		_students = new ArrayList<Student>();
 	}
 	
 	public String getName() {
@@ -51,7 +50,7 @@ public class Course {
 		}
 	}
 
-	public Collection<Student> getStudents() {
+	public Iterable<Student> getStudents() {
 		return _students;
 	}
 }
