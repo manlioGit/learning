@@ -154,17 +154,43 @@ emphstyle={[2]\color{blue}}
 \end{frame}
 
 \section{Refactoring and Design}
+\subsection{intro}
 \begin{frame}
   \frametitle{Refactoring and Design} 
   \begin{itemize}
-  		\item<+-> When it's better to rewrite everyting from scratch!
-  		\item<+-> To refactor you should have code that work mostly correctly..
-  		\item<+-> With core legay systems refactor (i.e. susstitute) components one at a time..
-  		\item<+-> When you're close to a deadline.. unnfinished refactors can be worst that the previuos state..!..
-  		\item<+-> ..but remember to pay your debts!
-  		\item<+-> ``Not having enough time usually is a sign that you need to do some refactoring''
+  		\item<+-> Design is programming!
+  		\item<+-> Refactoring can be an alternative to upfront design.. 
+  		\item<+-> ..you don't need to find the \textit{right} solution.. you find the solution the continuosly adapt! (the reasonable one!)
+  		\item<+-> ..as you dig into the problem, you better understand it.. so you adapt
+  		\item<+-> ..so \textbf{keep your design as simple as possible!}
+  \end{itemize}
+\end{frame}  
+  
+  \begin{frame}
+  \frametitle{Refactoring and Design} 
+  \begin{itemize}
+  		\item<+-> Finding flexible solutions that support change can be really expensive.. 
+  		\item<+-> ..and generally they are really complex..
+  		\item<+-> ..maybe you have software that can flex easily.. but you pay in maintainning it 
+  		\item<+-> Refactoing can lead to \textbf{simpler} designs without sacrificing flexibility..
+  		\item<+-> To summarize.. again.. \textbf{build the simplest thing that can possibly work!}
   \end{itemize}
 \end{frame}
 
+\section{Refactoring and Performance}
+\subsection{intro}
+\begin{frame}
+  \frametitle{Refactoring and Performance} 
+  \begin{itemize}
+  		\item<+-> Common concern while coding..
+  		\item<+-> Prefer understanding over performance..(in a reasonable way!)
+  		\item<+-> A simple design can be easily tuned later..
+  		\item<+-> ..consider context: real time applications and so on..
+  		\item<+-> In optimizing time we should consider time to understand a piece of code also..
+  		\item<+-> When you want to optimize.. don't speculate but use a profiler!
+  		\item<+-> To summarize: \textbf{No premature optimization, but late optimize}..
+  		\item<+-> ..to go faster.. refactor!
+  \end{itemize}
+\end{frame}
 
 \end{document}
