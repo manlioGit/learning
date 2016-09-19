@@ -1,0 +1,130 @@
+%
+% -- Manlio Modugno
+
+\documentclass{beamer} 
+\usepackage{eulervm}
+%\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{bold-extra}
+\usepackage{cancel}
+\usepackage{fancybox}
+\usepackage{soul}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amsmath}
+%\hypersetup{colorlinks=true,urlcolor=blue}
+
+\newcommand{\codefont}{\fontsize{6}{8}\selectfont}
+\lstset{language=[Sharp]C, 
+captionpos=b, 
+frame=lines,
+lineskip= 1pt, %space between lines
+basicstyle=\codefont, 
+keywordstyle=\color{blue}, 
+commentstyle=\color{green}, 
+stringstyle=\color{red}, 
+numbers=left, 
+numberstyle=\tiny, 
+stepnumber=2,
+numbersep=5pt,
+breaklines=true, 
+breakatwhitespace=false,
+showstringspaces=false,
+frame=single,
+tabsize=2,
+emph={double,bool,int,unsigned,char,true,false,void},
+emphstyle=\color{blue},
+emph={Assert,Test},
+emphstyle=\color{red},
+emph={[2]\using,\#define,\#ifdef,\#endif},
+emphstyle={[2]\color{blue}}
+}
+
+
+\mode<presentation>
+\definecolor{title_color}{RGB}{2,128,181} 
+\usetheme{Ilmenau}
+\usecolortheme[named=title_color]{structure}
+\setbeamercolor{palette quaternary}{use=structure,fg=black,bg=white} %header footer color
+\useoutertheme[subsection=false]{smoothbars}
+\setbeamercovered{transparent}
+\setbeamertemplate{navigation symbols}{}
+\setbeamerfont{subsection in toc}{size=\scriptsize}
+
+\title{Principles in Refactoring - part 2}
+\author{Manlio Modugno}
+\institute[GMTechnologies] 
+
+\date[22.09.2016] 
+{22.09.2016 - Principles in Refactoring - part 2}
+
+\subject{}
+
+\graphicspath{{img/}}
+\pgfdeclareimage[height=0.6cm]{mfg-logo}{img/mfgLogo}
+\logo{\pgfuseimage{mfg-logo}}
+
+%
+% Content start
+%
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Argomenti Trattati}
+  \tableofcontents
+\end{frame}
+
+\section{Principles in Refactoring- part 2}
+\subsection{What do I tell my manager?}
+\begin{frame}
+  \frametitle{What do I tell my manager?}
+  \begin{itemize}
+	\item<+-> A tech savvy manager understands principles.. and he's the one who starts it perhaps!
+	\item<+-> ..a manager more driven by schedule than quality... don't tell...(I don't totally agree..) 
+	\item<+-> ..but if the fastest way to getting things done is to refactor.. than I refactor!
+  \end{itemize}
+\end{frame}
+
+\subsection{Indirection and refactoring}
+\begin{frame}
+  \frametitle{Indirection and refactoring}
+  \begin{itemize}
+	\item<+-> Most refactorings introduces a lot of indirection, it tends to break big objects/methods into several smaller ones 
+	\item<+-> Pay attention to multi layer indirection!
+  \end{itemize}
+\end{frame}
+
+\section{Problems With Refactoring}
+\subsection{Intro}
+\begin{frame}
+  \frametitle{Problems With Refactoring} 
+  \begin{itemize}
+  		\item<+-> ...don't fall in the white rabbit's hole!..
+  		\item<+-> .. always evaluate deadlines.. 
+  		\item<+-> ..make more little refactors to accomplish a bigger one later..
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Databases} 
+  \begin{itemize}
+  		\item<+-> DB are (usually) difficult to change and migrate (..solutions exist nowadays..)
+  		\item<+-> Layer between application logic and data can be a solution..
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Interfaces} 
+  \begin{itemize}
+  		\item<+-> When you change an interface anything can happen..
+  		\item<+-> A \textit{rename method} can't be a problem if you can acess all the code.. otherwise you have a ``published interface''..
+  		\item<+-> ..in this case the old method call the new one (without duplicating it!) and add a deprecation marker
+  		\item<+-> When you can.. don't publish interfaces! (..and relax ownership policies on the code..)
+  \end{itemize}
+\end{frame}
+
+\end{document}
