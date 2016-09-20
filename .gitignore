@@ -13,3 +13,4 @@ bin/
 .settings/
 RemoteSystemsTempFiles/
 *.class
+*_excluded.txt
