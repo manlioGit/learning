@@ -1,7 +1,6 @@
 package ch.seminar.view;
 
-import static ch.seminar.util.Format.component;
-import static ch.seminar.util.Format.newLine;
+import static ch.seminar.util.Format.*;
 import ch.seminar.Course;
 import ch.seminar.Student;
 
@@ -22,7 +21,8 @@ public class Csv implements View{
 		}
 		
 		return 
-			newLine(component(_course.getNumber()) + component(_course.getDescription()) + component(_course.getLocation()) + component(_course.getSeatsLeft())) +
+			newLine(component(_course.getNumber()) + component(_course.getDescription()) + component(_course.getLocation()) 
+					+ component(_course.getSeatsLeft()) + component(_course.getTime())) +
 			studentList;
 	}
 

@@ -31,6 +31,7 @@ public class Html implements View {
 		          "<li>" + _course.getDescription() + "</li>" +
 		          "<li>" + _course.getLocation() + "</li>" +
 		          "<li>" + _course.getSeatsLeft() + "</li>" +
+		          "<li>" + _course.getTime() + "</li>" +
 		    "</ul>" +
 		    "<div>partecipanti:</div>" +
 		    studentList +

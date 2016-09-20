@@ -3,6 +3,8 @@ package ch.seminar;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.seminar.util.Time;
+
 public class Course {
 
 	private final String _name;
@@ -10,15 +12,17 @@ public class Course {
 	private final String _number;
 	private final String _location;
 	private final int _totalSeats;
+	private final Time _start;
 
 	private final List<Student> _students;
 	
-	public Course(String name, String description, String number, String location, int totalSeats) {
+	public Course(String name, String description, String number, String location, int totalSeats, Time start) {
 		_name = name;
 		_description = description;
 		_number = number;
 		_location = location;
 		_totalSeats = totalSeats;
+		_start = start;
 		_students = new ArrayList<Student>();
 	}
 	
@@ -52,5 +56,9 @@ public class Course {
 
 	public Iterable<Student> getStudents() {
 		return _students;
+	}
+
+	public Time getTime() {
+		return _start;
 	}
 }

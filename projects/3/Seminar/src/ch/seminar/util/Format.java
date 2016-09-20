@@ -1,6 +1,6 @@
 package ch.seminar.util;
 
-import static java.lang.System.getProperty;
+import static java.lang.System.*;
 
 public class Format {
 
@@ -8,7 +8,7 @@ public class Format {
 		return token + getProperty("line.separator");
 	}
 	
-	public static String component(String token){
+	public static String component(Object token){
 		return "\"" + token + "\";";
 	}
 	

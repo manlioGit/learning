@@ -1,6 +1,6 @@
 package ch.seminar.view;
 
-import static ch.seminar.util.Format.newLine;
+import static ch.seminar.util.Format.*;
 import ch.seminar.Course;
 import ch.seminar.Student;
 
@@ -21,6 +21,7 @@ public class Raw implements View {
 		return newLine(_course.getName() + " " + _course.getNumber() + ": " + _course.getDescription()) +
 			   newLine("location: " + _course.getLocation()) +
 			   newLine("seats left: " + _course.getSeatsLeft()) +
+			   newLine("start: " + _course.getTime()) +
 			   newLine("") +
 			   newLine("Enrollment:") +
 			   studentList;
