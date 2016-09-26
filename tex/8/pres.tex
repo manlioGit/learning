@@ -93,8 +93,33 @@ emphstyle={[2]\color{blue}}
 \begin{frame}
   \frametitle{Duplicated Code}
   \begin{itemize}
-	\item<+-> Number one in smell parade! 
-	\item<+-> Duplication destroy resilience
+	\item<+-> Number one in smell parade! Duplication destroy resilience
+	\item<+-> ``simple'' duplication is quite easy to remove using refator like \textit{Extract Method}, etc..
+	\item<+-> More difficult when we have conceptual duplication like different ways to access data layer, classes that mimic data structure already existent, etc..
+  \end{itemize}
+\end{frame}
+
+\subsection{Long Method}
+\begin{frame}
+  \frametitle{Long Method}
+  \begin{itemize}
+	\item<+-> Keep your methods short!.. your code live longer.. with rigth indirection level 
+	\item<+-> A long procedure is hard to read / undestand...
+	\item<+-> With cohesive (little) methods \underline{\textbf{with good naming}} you don't need to look into to grasp intent...
+	\item<+-> Decompose methods in a aggressive way (..but keep always good sense).. even to substitute a single line of code if new method name ehnance unserstandibility!
+	\item<+-> Fundmental metric to consider is not only the phisical length of the method, but the \textbf{semantic distance} between what the method does and how it does it.
+	
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Long Method - refactor}
+  \begin{itemize}
+	\item<+-> To reduce a method usually apply \textit{Extract Method} to parts of method that ``go nicely togheter'' (i.e. cohesive parts) 
+	\item<+-> With methods with a lot of parameters (i.e. Long Parameter List) use \textit{Replace Temp With Query}, \textit{Introduce Parameter Object}, \textit{Preserve Whole Object} or \textit{Replace Method With Method Object} to avoid to pass around parameters to extracted methods
+	\item<+-> When you see a comment there's probably an high semantic distance.. so \textit{Extract Method}  
+	\item<+-> Conditional and loops are also a good sign to execute extraction.. use \textit{Decompose Conditional} or extract loop in its own new method
   \end{itemize}
 \end{frame}
 
