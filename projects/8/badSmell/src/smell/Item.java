@@ -1,6 +1,6 @@
 package smell;
 
-import static smell.Format.*;
+import static smell.Format.line;
  
 public class Item {
     
@@ -15,29 +15,17 @@ public class Item {
         _quantity = quantity;
 		_unitPrice = unitPrice;
     }
- 
-    int getProductID() {
-        return _productId;
-    }
- 
-    int getImageID() {
-        return _imageId;
-    }
- 
-    int getQuantity() {
-        return _quantity;
-    }
- 
-    int getUnitPrice() {
-        return _unitPrice;
-    }
     
+    public int total() {
+    	return _unitPrice * _quantity;
+    }
+ 
     public String render(){
 		return 	line("Begin Line Item") +
-		    	line("Product = " + getProductID())+
-		    	line("Image = " + getImageID()) +
-		    	line("Quantity = " + getQuantity()) +
-		    	line("Total = " + (getUnitPrice() * getQuantity())) +
+		    	line("Product = " + _productId)+
+		    	line("Image = " + _imageId) +
+		    	line("Quantity = " + _quantity) +
+		    	line("Total = " + total()) + 
 		    	line("End Line Item");
     }
 }
