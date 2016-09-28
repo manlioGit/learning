@@ -1,3 +1,8 @@
 bad naming (against language convention also (lower case class etc))
 bad encapsulation (i.e. default clasd instead of public)
 unused vars
+useless indirection (LineItemList)
+Duplicated Code
+Long Method
+Large Class
+dead/unused code

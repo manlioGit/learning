@@ -1,26 +1,30 @@
 package badSmell;
 
+import static smell.Format.line;
+
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 public class FakeWriter extends PrintWriter {
 
-	private final List<String> _content;
+	private String _content = "";
+
+	public FakeWriter(File file) throws FileNotFoundException {
+		super(file);
+	}
 	
-	public FakeWriter(String fileName) throws FileNotFoundException {
-		super(fileName);
-		
-		_content = new ArrayList<>();
+	@Override
+	public void println(String x) {
+		_content += line(x);
 	}
 
 	@Override
-	public void println(String x) {
-		getContent().add(x);
+	public void print(String b) {
+		_content += b;
 	}
-
-	public List<String> getContent() {
+	
+	public String getContent() {
 		return _content;
 	}
 }
