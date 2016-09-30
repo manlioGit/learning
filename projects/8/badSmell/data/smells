@@ -1,6 +1,7 @@
 bad naming (against language convention also (lower case class etc))
 bad encapsulation (i.e. default class instead of public)
 unused vars
+temp vars
 useless indirection (LineItemList)
 Duplicated Code
 Long Method
