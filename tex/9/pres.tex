@@ -90,92 +90,83 @@ emphstyle={[2]\color{blue}}
   \end{itemize}
 \end{frame}
 
-\subsection{Duplicated Code}
+\subsection{Pull Up Method}
 \begin{frame}
-  \frametitle{Duplicated Code}
+  \frametitle{Pull Up Method}
   \begin{itemize}
-	\item<+-> Number one in smell parade! Duplication destroy resilience
-	\item<+-> ``simple'' duplication is quite easy to remove using refator like \textit{Extract Method}, etc..
-	\item<+-> More difficult when we have conceptual duplication like different ways to access data layer, classes that mimic data structure already existent, etc..
+	\item<+-> When you have identical methods on subclasses...
+	\item<+-> ..whenever there is duplication, you face the risk that an alteration to one will not be made to the other
+	\item<+-> When there are similar methods.. start from generlize them (i.e. extract same behavior and parameterize)
   \end{itemize}
 \end{frame}
 
-\subsection{Long Method}
+\subsection{Substitute Algorithm}
 \begin{frame}
-  \frametitle{Long Method}
+  \frametitle{Substitute Algorithm}
   \begin{itemize}
-	\item<+-> Keep your methods short!.. your code live longer.. with right indirection level 
-	\item<+-> A long procedure is hard to read / undestand...
-	\item<+-> With cohesive (little) methods \underline{\textbf{with good naming}} you don't need to look into to grasp intent...
-	\item<+-> Decompose methods in a aggressive way (..but keep always good sense).. even to substitute a single line of code if new method name ehnance unserstandibility!
-	\item<+-> Fundmental metric to consider is not only the phisical length of the method, but the \textbf{semantic distance} between what the method does and how it does it.
+	\item<+-> When you want to replace an algorithm with one that is clearer..
+	\item<+-> ...can occurs as you learn more about a problem and realize that there's an easier way to do it.
+	\item<+-> ... It also happens if you start using a library that supplies features that duplicate your code
   \end{itemize}
 \end{frame}
 
-
+\subsection{Extract Class}
 \begin{frame}
-  \frametitle{Long Method - refactor}
+  \frametitle{Extract Class}
   \begin{itemize}
-	\item<+-> To reduce a method usually apply \textit{Extract Method} to parts of method that ``go nicely togheter'' (i.e. cohesive parts) 
-	\item<+-> With methods with a lot of parameters (i.e. Long Parameter List) use \textit{Replace Temp With Query}, \textit{Introduce Parameter Object}, \textit{Preserve Whole Object} or \textit{Replace Method With Method Object} to avoid to pass around parameters to extracted methods
-	\item<+-> When you see a comment there's probably an high semantic distance.. so \textit{Extract Method}  
-	\item<+-> Conditional and loops are also a good sign to execute extraction.. use \textit{Decompose Conditional} or extract loop in its own new method
+	\item<+-> A class can grow during his lifecycle.. a big class has too many responsibilities..
+	\item<+-> ...split cohesive parts in a new one
   \end{itemize}
 \end{frame}
 
-\subsection{Large Class}
+\subsection{Replace Temp With Query}
 \begin{frame}
-  \frametitle{Large Class}
+  \frametitle{Replace Temp With Query}
   \begin{itemize}
-	\item<+-> A class is trying to do too much.. often has a lot of instance variables.. duplication is probably behind the corner 
-	\item<+-> Apply \textit{Extract Class} or \textit{Extract Subclass} to a subset of instance variables in cohesive way
-	\item<+-> A class with too much code support duplication, chaos and death!
-	\item<+-> Another approach to decompose huge classes is to use \textit{Extract Interface} looking at clients' use
-  \end{itemize}
-\end{frame}
-  
-\subsection{Long Parameter List}
-\begin{frame}
-  \frametitle{Long Parameter List}
-  \begin{itemize}
-	\item<+-> With an OO lang you can pass to a method enough to satisfy everything it needs.. no more km long paramter list 
-	\item<+-> Apply \textit{Raplace Parameter with Method}, \textit{Preserve Whole Object} or \textit{Introduce Parameter Object} to reduce amount of paraters passed around
-	\item<+-> An exception is when you don't want to increase coupling between caller and callee...
+	\item<+-> When you have a temp var holding a result of an expression
+	\item<+-> ...extracting in a method can be re used..
+	\item<+-> Temps encourage longer methods and are an obstacle to \textit{Extract Method}
   \end{itemize}
 \end{frame}
 
-\subsection{Divergent Change}
+\subsection{Introduce Parameter Object}
 \begin{frame}
-  \frametitle{Divergent Change}
+  \frametitle{Introduce Parameter Object}
   \begin{itemize}
-	\item<+-> When making a change we want to jump to single simple clear point and make the change
-	\item<+-> Divergent change occurs when one class is commonly changed in diffrent ways for different reasons..
-	\item<+-> ..in this case you'd prefer to have more object instead of one..use \textit{Extract Class}
-	\item<+-> Any change to handle a variation should change a single class
+	\item<+-> When you have a group of parameters that naturally go together
+	\item<+-> ...replace them with an object
+	\item<+-> At first you have a \textit{Data Clump}, but this is ready to receive behavior...
   \end{itemize}
 \end{frame}
 
-\subsection{Shotgun Surgery}
+\subsection{Preserve Whole Object}
 \begin{frame}
-  \frametitle{Shotgun Surgery}
+  \frametitle{Preserve Whole Object}
   \begin{itemize}
-	\item<+-> Is the opposite of \textit{Divergent Change}.. when you have to make a lot of little changes to a lot of different classes
-	\item<+-> Use \textit{Move Method}, \textit{Move Field} or \textit{Inline Class} to put all the changes into a single class
-	\item<+-> Divergent change: a single class suffers of many changes 
-	\item<+-> Shotgun surgery: a single change alters many classes
+	\item<+-> When you are getting several values from an object and passing these values as parameters in a method call...
+	\item<+-> ...send the whole object instead
+	\item<+-> ..a need for new data in the mehod implies a change to the signature..
+	\item<+-> Don't use you if you want to keep low coupling between caller and callee
   \end{itemize}
 \end{frame}
 
-\subsection{Feature Envy}
+\subsection{Replace Method With Method Object}
 \begin{frame}
-  \frametitle{Feature Envy}
+  \frametitle{Replace Method With Method Object}
   \begin{itemize}
-	\item<+-> Whole point of objects: a technique to package data with the processes used on that data!
-	\item<+-> When you see an object more interested in components of another class other than its own properties / methods
-	\item<+-> Use \textit{Move Method}, \textit{Extract Method} to give a new proper house
-	\item<+-> In a mixed situation move method to the class that has most of the data used.
-	\item<+-> Exceptions exist.. as rule of thumb .. put things together that change togheter.
-  \end{itemize}
+	\item<+-> When you have a long method that uses local variables in such a way that you cannot apply \textit{Extract Method}..
+	\item<+-> ...turn the method into its own object so that all the local variables become fields on that object
+   \end{itemize}
+\end{frame}
+
+\subsection{Decompose Conditional}
+\begin{frame}
+  \frametitle{Decompose Conditionals}
+  \begin{itemize}
+	\item<+-> When you have a complicated conditional (if-then-else) statement...
+	\item<+-> ...Extract methods from the condition, then part, and else parts
+	\item<+-> Conditional logic is the most common area of complexity.. 
+   \end{itemize}
 \end{frame}
 
 \end{document}
