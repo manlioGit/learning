@@ -1,0 +1,176 @@
+%
+% -- Manlio Modugno
+
+\documentclass{beamer} 
+\usepackage{eulervm}
+%\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{bold-extra}
+\usepackage{cancel}
+\usepackage{fancybox}
+\usepackage{soul}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amsmath}
+%\hypersetup{colorlinks=true,urlcolor=blue}
+
+\newcommand{\codefont}{\fontsize{6}{8}\selectfont}
+\lstset{language=[Sharp]C, 
+captionpos=b, 
+frame=lines,
+lineskip= 1pt, %space between lines
+basicstyle=\codefont, 
+keywordstyle=\color{blue}, 
+commentstyle=\color{green}, 
+stringstyle=\color{red}, 
+numbers=left, 
+numberstyle=\tiny, 
+stepnumber=2,
+numbersep=5pt,
+breaklines=true, 
+breakatwhitespace=false,
+showstringspaces=false,
+frame=single,
+tabsize=2,
+emph={double,bool,int,unsigned,char,true,false,void},
+emphstyle=\color{blue},
+emph={Assert,Test},
+emphstyle=\color{red},
+emph={[2]\using,\#define,\#ifdef,\#endif},
+emphstyle={[2]\color{blue}}
+}
+
+
+\mode<presentation>
+\definecolor{title_color}{RGB}{2,128,181} 
+\usetheme{Ilmenau}
+\usecolortheme[named=title_color]{structure}
+\setbeamercolor{palette quaternary}{use=structure,fg=black,bg=white} %header footer color
+\useoutertheme[subsection=false]{smoothbars}
+\setbeamercovered{transparent}
+\setbeamertemplate{navigation symbols}{}
+\setbeamerfont{subsection in toc}{size=\scriptsize}
+
+\title{Bad Smells in Code - part2}
+\author{Manlio Modugno}
+\institute[GMTechnologies] 
+
+\date[17.10.2016] 
+{17.10.2016 - Bad Smells in Code - part2}
+
+\subject{}
+
+\graphicspath{{img/}}
+\pgfdeclareimage[height=0.6cm]{mfg-logo}{img/mfgLogo}
+\logo{\pgfuseimage{mfg-logo}}
+
+%
+% Content start
+%
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Argomenti Trattati}
+  \tableofcontents
+\end{frame}
+
+\section{Bad Smells in Code - part 2}
+\subsection{Data Clumps}
+\begin{frame}
+  \frametitle{Data Clumps}
+  \begin{itemize}
+	\item<+-> XXX
+  \end{itemize}
+\end{frame}
+
+\subsection{Primitive Obsession}
+\begin{frame}
+  \frametitle{Pull Up Method}
+  \begin{itemize}
+	\item<+-> When you have identical methods on subclasses...
+	\item<+-> ..whenever there is duplication, you face the risk that an alteration to one will not be made to the other
+	\item<+-> When there are similar methods.. start from generlize them (i.e. extract same behavior and parameterize)
+  \end{itemize}
+\end{frame}
+
+\subsection{Switch Statements}
+\begin{frame}
+  \frametitle{Switch Statements}
+  \begin{itemize}
+	\item<+-> ..are sign of procedural code
+	\item<+-> ..favor duplication (scattered around the code)
+	\item<+-> polymorphism can tackle them.. (pay attention to overkill..)
+  \end{itemize}
+\end{frame}
+
+
+\subsection{Parallel Inheritance Hierarchies}
+\begin{frame}
+  \frametitle{Parallel Inheritance Hierarchies}
+  \begin{itemize}
+	\item<+-> A special case of \textit{Shotgun Surgery}..
+	\item<+-> ...you see it every time a subclass borns, another with same prefix comes along 
+	\item<+-> ... referencing instances of one hierarchy to another one helps eliminating referring classes
+  \end{itemize}
+\end{frame}
+
+\subsection{Lazy Class}
+\begin{frame}
+  \frametitle{Lazy Class}
+  \begin{itemize}
+	\item<+-> Every class costs money to maintain and understand..
+	\item<+-> ...if it isn't doing enough.. eliminate! 
+  \end{itemize}
+\end{frame}
+
+\subsection{Speculative Generality}
+\begin{frame}
+  \frametitle{Speculative Generality}
+  \begin{itemize}
+	\item<+-> ``Oh, I think we need the ability to this kind of thing someday''
+	\item<+-> Keep only what you need and delete unsed things...
+	\item<+-> A sign of this  kind of smell are methods used only by test..
+  \end{itemize}
+\end{frame}
+
+\subsection{Temporary Field}
+\begin{frame}
+  \frametitle{Temporary Field}
+  \begin{itemize}
+	\item<+-> An instance var is set only in certain circumstances...
+	\item<+-> ...an object use (always) all of its variables.. 
+	\item<+-> Find a new home for the orphan var...
+  \end{itemize}
+\end{frame}
+
+\subsection{Message Chains}
+\begin{frame}
+  \frametitle{Message Chains}
+  \begin{itemize}
+	\item<+-> XXX
+  \end{itemize}
+\end{frame}
+
+\subsection{Middle Man}
+\begin{frame}
+  \frametitle{Middle Man}
+  \begin{itemize}
+	\item<+-> A prime feature of OO is encapsulation.. hiding internal details from the rest of the world.
+	\item<+-> ...often to achieve this a lot of delagation comes in..
+	\item<+-> ...\textit{Remove Middle Man} can be helpful in this sistuation
+   \end{itemize}
+\end{frame}
+
+\subsection{Inappropriate Intimacy}
+\begin{frame}
+  \frametitle{Inappropriate Intimacy}
+  \begin{itemize}
+	\item<+-> XXX 
+   \end{itemize}
+\end{frame}
+
+\end{document}
