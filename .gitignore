@@ -14,3 +14,4 @@ bin/
 RemoteSystemsTempFiles/
 *.class
 *_excluded.txt
+.recommenders
