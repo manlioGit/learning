@@ -52,12 +52,12 @@ emphstyle={[2]\color{blue}}
 \setbeamertemplate{navigation symbols}{}
 \setbeamerfont{subsection in toc}{size=\scriptsize}
 
-\title{Bad Smells in Code - part2}
+\title{Bad Smells in Code / Refactorings - part2}
 \author{Manlio Modugno}
 \institute[GMTechnologies] 
 
 \date[17.10.2016] 
-{17.10.2016 - Bad Smells in Code - part2}
+{17.10.2016 - Bad Smells in Code / Refactorings - part2}
 
 \subject{}
 
@@ -79,6 +79,58 @@ emphstyle={[2]\color{blue}}
 \end{frame}
 
 \section{Bad Smells in Code - part 2}
+\subsection{Introduce Parameter Object}
+\begin{frame}
+  \frametitle{Introduce Parameter Object}
+  \begin{itemize}
+	\item<+-> When you have a particular group of parameters passed around..
+	\item<+-> ..group them..
+	\item<+-> You reduce long parameter and you created a new new house for some behaviour..
+  \end{itemize}
+\end{frame}
+
+
+\subsection{Preserve Whole Object}
+\begin{frame}
+  \frametitle{Preserve Whole Object}
+  \begin{itemize}
+	\item<+-> When a object passes several data values in a method call..
+	\item<+-> ..send the whole object instead
+	\item<+-> You reduce long parameter list.. signature method is mode resilient and you ehnance readbilityand you created a new new house for some behaviour..
+	\item<+-> ..a drawback can be the coupling from required object and the called one.
+	\item<+-> ..a false drawback is the information amount passed around (i.e. when you need just one value.. pass the whole object in any case!)
+	\item<+-> ..look for feature envy around the corner..
+  \end{itemize}
+\end{frame}
+
+\subsection{Replace Method with Method Object}
+\begin{frame}
+  \frametitle{Replace Method with Method Object}
+  \begin{itemize}
+	\item<+-> When there are difficulties in applying \textit{Extract Method} because of a lot of temps..
+	\item<+-> ..RMWMO turns temps into fields on the method object.. 
+	\item<+-> ..and then you can apply \textit{Extract Method} to break down priginal method
+  \end{itemize}
+\end{frame}
+
+\subsection{Decompose Conditional}
+\begin{frame}
+  \frametitle{Decompose Conditional}
+  \begin{itemize}
+	\item<+-> Conditional logic can be really tricky (i.e. if is evil)..
+	\item<+-> ..code, both in checks and in actions, can tells things in obscure way 
+	\item<+-> ..extracting conditions (or actions) can clarify things
+  \end{itemize}
+\end{frame}
+
+\subsection{Extract Subclass}
+\begin{frame}
+  \frametitle{Extract Subclass}
+  \begin{itemize}
+	\item<+-> When you have a class with behavior used only for some instances..
+  \end{itemize}
+\end{frame}
+
 \subsection{Data Clumps}
 \begin{frame}
   \frametitle{Data Clumps}
