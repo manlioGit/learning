@@ -27,11 +27,11 @@ public class DecomposeConditional {
 		}
 		
 		double calc() {
-			return isWinter() ? chargeWith(WINTER_RATE) + WINTER_SERVICE_CHARGE : chargeWith(SUMMER_RATE); 
+			return isWinter() ? chargeWith(WINTER_RATE, WINTER_SERVICE_CHARGE) : chargeWith(SUMMER_RATE, 0); 
 		}
 
-		private double chargeWith(double factor) {
-			return _quantity * factor;
+		private double chargeWith(double rate, double extra) {
+			return _quantity * rate + extra;
 		}
 
 		private boolean isWinter() {
