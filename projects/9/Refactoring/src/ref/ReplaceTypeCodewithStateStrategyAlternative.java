@@ -34,30 +34,30 @@ public class ReplaceTypeCodewithStateStrategyAlternative {
 	} 
 	 */
 	
-	abstract class Employee {
+	interface Employee {
 
 		static final int ENGINEER = 0;
 		static final int SALESMAN = 1;
 		static final int MANAGER = 2;
 
-		abstract int payAmount();
+		int payAmount();
 	}
 	
-	class Engineer extends Employee {
+	class Engineer implements Employee {
 		
 		private int _salary;
 
 		public Engineer(int salary) {
 			_salary = salary;
 		}
-		
+
 		@Override
-		int payAmount() {
+		public int payAmount() {
 			return _salary;
 		}
 	}
 	
-	class SalesMan extends Employee {
+	class SalesMan implements Employee {
 		
 		private int _salary;
 		private int _commission;
@@ -73,7 +73,7 @@ public class ReplaceTypeCodewithStateStrategyAlternative {
 		}
 	}
 	
-	class Manager extends Employee {
+	class Manager implements Employee {
 
 		private int _salary;
 		private int _bonus;

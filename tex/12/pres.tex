@@ -1,0 +1,120 @@
+%
+% -- Manlio Modugno
+
+\documentclass{beamer} 
+\usepackage{eulervm}
+%\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{bold-extra}
+\usepackage{cancel}
+\usepackage{fancybox}
+\usepackage{soul}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amsmath}
+%\hypersetup{colorlinks=true,urlcolor=blue}
+
+\newcommand{\codefont}{\fontsize{6}{8}\selectfont}
+\lstset{language=[Sharp]C, 
+captionpos=b, 
+frame=lines,
+lineskip= 1pt, %space between lines
+basicstyle=\codefont, 
+keywordstyle=\color{blue}, 
+commentstyle=\color{green}, 
+stringstyle=\color{red}, 
+numbers=left, 
+numberstyle=\tiny, 
+stepnumber=2,
+numbersep=5pt,
+breaklines=true, 
+breakatwhitespace=false,
+showstringspaces=false,
+frame=single,
+tabsize=2,
+emph={double,bool,int,unsigned,char,true,false,void},
+emphstyle=\color{blue},
+emph={Assert,Test},
+emphstyle=\color{red},
+emph={[2]\using,\#define,\#ifdef,\#endif},
+emphstyle={[2]\color{blue}}
+}
+
+
+\mode<presentation>
+\definecolor{title_color}{RGB}{2,128,181} 
+\usetheme{Ilmenau}
+\usecolortheme[named=title_color]{structure}
+\setbeamercolor{palette quaternary}{use=structure,fg=black,bg=white} %header footer color
+\useoutertheme[subsection=false]{smoothbars}
+\setbeamercovered{transparent}
+\setbeamertemplate{navigation symbols}{}
+\setbeamerfont{subsection in toc}{size=\scriptsize}
+
+\title{Bad Smells in Code / Refactorings - part2}
+\author{Manlio Modugno}
+\institute[GMTechnologies] 
+
+\date[03.11.2016] 
+{03.11.2016 - Bad Smells in Code}
+
+\subject{}
+
+\graphicspath{{img/}}
+\pgfdeclareimage[height=0.6cm]{mfg-logo}{img/mfgLogo}
+\logo{\pgfuseimage{mfg-logo}}
+
+%
+% Content start
+%
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Argomenti Trattati}
+  \tableofcontents
+\end{frame}
+
+\section{Bad Smells in Code}
+\subsection{Lazy Class}
+\begin{frame}
+  \frametitle{Lazy Class}
+  \begin{itemize}
+	\item<+-> Every class costs money to maintain and understand..
+	\item<+-> ...if it isn't doing enough.. eliminate! 
+  \end{itemize}
+\end{frame}
+
+\subsection{Speculative Generality}
+\begin{frame}
+  \frametitle{Speculative Generality}
+  \begin{itemize}
+	\item<+-> ``Oh, I think we need the ability to this kind of thing someday''
+	\item<+-> Keep only what you need and delete unused things...
+	\item<+-> A sign of this  kind of smell are methods used only by test..
+  \end{itemize}
+\end{frame}
+
+\subsection{Temporary Field}
+\begin{frame}
+  \frametitle{Temporary Field}
+  \begin{itemize}
+	\item<+-> An instance var is set only in certain circumstances...
+	\item<+-> ...an object use (always) all of its variables.. 
+	\item<+-> Find a new home for the orphan var...
+  \end{itemize}
+\end{frame}
+
+\subsection{Message Chains}
+\begin{frame}
+  \frametitle{Message Chains}
+  \begin{itemize}
+	\item<+-> When a client asks one object for another object.. which in turn is a client for another object..and so on..
+	\item<+-> a client is coupled to the structure of the navigation.. any change to the intermediate relationships can reflect on client..
+  \end{itemize}
+\end{frame}
+
+\end{document}
