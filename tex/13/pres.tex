@@ -1,0 +1,145 @@
+%
+% -- Manlio Modugno
+
+\documentclass{beamer} 
+\usepackage{eulervm}
+%\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{bold-extra}
+\usepackage{cancel}
+\usepackage{fancybox}
+\usepackage{soul}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amsmath}
+%\hypersetup{colorlinks=true,urlcolor=blue}
+
+\newcommand{\codefont}{\fontsize{6}{8}\selectfont}
+\lstset{language=[Sharp]C, 
+captionpos=b, 
+frame=lines,
+lineskip= 1pt, %space between lines
+basicstyle=\codefont, 
+keywordstyle=\color{blue}, 
+commentstyle=\color{green}, 
+stringstyle=\color{red}, 
+numbers=left, 
+numberstyle=\tiny, 
+stepnumber=2,
+numbersep=5pt,
+breaklines=true, 
+breakatwhitespace=false,
+showstringspaces=false,
+frame=single,
+tabsize=2,
+emph={double,bool,int,unsigned,char,true,false,void},
+emphstyle=\color{blue},
+emph={Assert,Test},
+emphstyle=\color{red},
+emph={[2]\using,\#define,\#ifdef,\#endif},
+emphstyle={[2]\color{blue}}
+}
+
+
+\mode<presentation>
+\definecolor{title_color}{RGB}{2,128,181} 
+\usetheme{Ilmenau}
+\usecolortheme[named=title_color]{structure}
+\setbeamercolor{palette quaternary}{use=structure,fg=black,bg=white} %header footer color
+\useoutertheme[subsection=false]{smoothbars}
+\setbeamercovered{transparent}
+\setbeamertemplate{navigation symbols}{}
+\setbeamerfont{subsection in toc}{size=\scriptsize}
+
+\title{Bad Smells in Code / Refactorings - part2}
+\author{Manlio Modugno}
+\institute[GMTechnologies] 
+
+\date[17.10.2016] 
+{17.10.2016 - Bad Smells in Code / Refactorings - part2}
+
+\subject{}
+
+\graphicspath{{img/}}
+\pgfdeclareimage[height=0.6cm]{mfg-logo}{img/mfgLogo}
+\logo{\pgfuseimage{mfg-logo}}
+
+%
+% Content start
+%
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Argomenti Trattati}
+  \tableofcontents
+\end{frame}
+
+\section{Bad Smells in Code - part 2}
+
+\subsection{Middle Man}
+\begin{frame}
+  \frametitle{Middle Man}
+  \begin{itemize}
+	\item<+-> A prime feature of OO is encapsulation: hiding internal details from the rest of the world.
+	\item<+-> ...often to achieve this a lot of delagation comes in..
+	\item<+-> ...\textit{Remove Middle Man} to interact directly to the object that really knows things
+	\item<+-> ...\textit{Inline Method} when a few methods aren't doing much
+	\item<+-> ...\textit{Replace Delegation with Inheritance} to turn Middle Man in a specific sub class
+   \end{itemize}
+\end{frame}
+
+\subsection{Remove Middle Man}
+\begin{frame}
+  \frametitle{Remove Middle Man}
+  \begin{itemize}
+	\item<+-> Too much delegation can be really problematic (layers of indirection)
+	\item<+-> Today delegation can be a good thing, tomorrow can ba awkward.. just fix it!
+   \end{itemize}
+\end{frame}
+
+\subsection{Inline Method}
+\begin{frame}
+  \frametitle{Inline Method}
+  \begin{itemize}
+	\item<+-> When you have a clear short body of a method.. 
+	\item<+-> ..remove indirection and inline it.
+	\item<+-> Irritating indirection also exists when you have a group of methods (classes also!) bad factored..
+	\item<+-> Inline everything as a preparatory refactoring.. (i.e. better to have bad things in a single place than in a lot around..)
+   \end{itemize}
+\end{frame}
+
+\subsection{Replace Delegation with Inheritance}
+\begin{frame}
+  \frametitle{Replace Delegation with Inheritance}
+  \begin{itemize}
+	\item<+-> Applicable when all the methods of delegating are used..
+	\item<+-> ..and when there isn't shared mutable object between delagating and delegate..
+   \end{itemize}
+\end{frame}
+
+\subsection{Inappropriate Intimacy}
+\begin{frame}
+  \frametitle{Inappropriate Intimacy}
+  \begin{itemize}
+	\item<+-> Too intimate classes can spend too much time in handling each other's parts..
+	\item<+-> \textit{Move Method}, \textit{Move Field} to separate intimacy
+	\item<+-> \textit{Extract Class} to factor out commonality
+	\item<+-> \textit{Change Bidirectional Association to Unidirectional} to reduce associations
+	\item<+-> \textit{Hide Delegate} to have another player (..and reduce intimacy with the others)
+	\item<+-> \textit{Replace Ihneritance with Delegation}. Ihneritance can bring a lot of intimacy 
+   \end{itemize}
+\end{frame}
+
+\subsection{Hide Delegate}
+\begin{frame}
+  \frametitle{Hide Delegate}
+  \begin{itemize}
+	\item<+-> Reverse of \textit{Remove Middle Man}.. introduce \textbf{encapsulation:}object needs to know less about other parts of the system..
+	\item<+-> ...when change arrives fewer objects need to be changed
+   \end{itemize}
+\end{frame}
+\end{document}
