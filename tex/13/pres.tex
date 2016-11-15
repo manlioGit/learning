@@ -78,9 +78,7 @@ emphstyle={[2]\color{blue}}
   \tableofcontents
 \end{frame}
 
-\section{Bad Smells in Code - part 2}
-
-\subsection{Middle Man}
+\section{Middle Man}
 \begin{frame}
   \frametitle{Middle Man}
   \begin{itemize}
@@ -121,7 +119,7 @@ emphstyle={[2]\color{blue}}
    \end{itemize}
 \end{frame}
 
-\subsection{Inappropriate Intimacy}
+\section{Inappropriate Intimacy}
 \begin{frame}
   \frametitle{Inappropriate Intimacy}
   \begin{itemize}
@@ -134,12 +132,40 @@ emphstyle={[2]\color{blue}}
    \end{itemize}
 \end{frame}
 
+\subsection{Change Bidirectional Association to Unidirectional}
+\begin{frame}
+  \frametitle{Change Bidirectional Association to Unidirectional}
+  \begin{itemize}
+	\item<+-> Bidirectional links can be useful but hard to maintain(i.e. proper add / remove)
+	\item<+-> ``zombie'' problem (objects that should be dead but keep living because of reference not cleared)
+	\item<+-> interdependency problem (a change to one link can implies a change in the other one) 
+   \end{itemize}
+\end{frame}
+
 \subsection{Hide Delegate}
 \begin{frame}
   \frametitle{Hide Delegate}
   \begin{itemize}
 	\item<+-> Reverse of \textit{Remove Middle Man}.. introduce \textbf{encapsulation:}object needs to know less about other parts of the system..
 	\item<+-> ...when change arrives fewer objects need to be changed
+   \end{itemize}
+\end{frame}
+
+\subsection{Replace Ihneritance with Delegation}
+\begin{frame}
+  \frametitle{Replace Ihneritance with Delegation}
+  \begin{itemize}
+	\item<+-> A subclass use partial interface/data of a superclass
+	\item<+-> Delegating uses remove confusion
+   \end{itemize}
+\end{frame}
+
+\section{Alternative Classes with Different Interfaces}
+\begin{frame}
+  \frametitle{Alternative Classes with Different Interfaces}
+  \begin{itemize}
+	\item<+-> When you have methods with different names / signatures that do same things.. use \textit{Rename Method}
+	\item<+-> Regroup behavior also to classes and apply \textit{Extract Superclass} if necessary
    \end{itemize}
 \end{frame}
 \end{document}
