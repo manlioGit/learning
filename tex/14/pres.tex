@@ -1,0 +1,212 @@
+%
+% -- Manlio Modugno
+
+\documentclass{beamer} 
+\usepackage{eulervm}
+%\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{bold-extra}
+\usepackage{cancel}
+\usepackage{fancybox}
+\usepackage{soul}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amsmath}
+%\hypersetup{colorlinks=true,urlcolor=blue}
+
+\newcommand{\codefont}{\fontsize{6}{8}\selectfont}
+\lstset{language=[Sharp]C, 
+captionpos=b, 
+frame=lines,
+lineskip= 1pt, %space between lines
+basicstyle=\codefont, 
+keywordstyle=\color{blue}, 
+commentstyle=\color{green}, 
+stringstyle=\color{red}, 
+numbers=left, 
+numberstyle=\tiny, 
+stepnumber=2,
+numbersep=5pt,
+breaklines=true, 
+breakatwhitespace=false,
+showstringspaces=false,
+frame=single,
+tabsize=2,
+emph={double,bool,int,unsigned,char,true,false,void},
+emphstyle=\color{blue},
+emph={Assert,Test},
+emphstyle=\color{red},
+emph={[2]\using,\#define,\#ifdef,\#endif},
+emphstyle={[2]\color{blue}}
+}
+
+
+\mode<presentation>
+\definecolor{title_color}{RGB}{2,128,181} 
+\usetheme{Ilmenau}
+\usecolortheme[named=title_color]{structure}
+\setbeamercolor{palette quaternary}{use=structure,fg=black,bg=white} %header footer color
+\useoutertheme[subsection=false]{smoothbars}
+\setbeamercovered{transparent}
+\setbeamertemplate{navigation symbols}{}
+\setbeamerfont{subsection in toc}{size=\scriptsize}
+
+\title{Bad Smells in Code / Refactorings - part3}
+\author{Manlio Modugno}
+\institute[GMTechnologies] 
+
+\date[01.12.2016] 
+{01.12.2016 - Bad Smells in Code / Refactorings - part3}
+
+\subject{}
+
+\graphicspath{{img/}}
+\pgfdeclareimage[height=0.6cm]{mfg-logo}{img/mfgLogo}
+\logo{\pgfuseimage{mfg-logo}}
+
+%
+% Content start
+%
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Argomenti Trattati}
+  \tableofcontents
+\end{frame}
+
+\section{Incomplete Library Class}
+\subsection{Incomplete Library Class}
+\begin{frame}
+  \frametitle{Incomplete Library Class}
+  \begin{itemize}
+	\item<+-> Often we use library (or framework..) to accomplish our job..
+	\item<+-> But they are omniscient and they can't save the world.. 
+	\item<+-> ..it's really difficult figure out a design until we've mostly built it
+	\item<+-> tie to an external dependency can be dangerous.. you can't acess the code
+	\item<+-> To avoid these kind of situations use \textit{Introduce Foreign Method} and \textit{Introduce Local Extension}
+   \end{itemize}
+\end{frame}
+
+\subsection{Introduce Foreign Method}
+\begin{frame}
+  \frametitle{Introduce Foreign Method}
+  \begin{itemize}
+	\item<+-> When modify code of external library is impossible, wrap the behaviour you need in the client class..
+	\item<+-> This is always a workaround.. so you should signal to the code owner to add that behaviour..
+   \end{itemize}
+\end{frame}
+
+\subsection{Introduce Local Extension}
+\begin{frame}
+  \frametitle{Introduce Local Extension}
+  \begin{itemize}
+	\item<+-> If you ara forced to introduce many foreign methods or you need often the same foreign method...
+	\item<+-> ..consider to introduce a class that wraps (NO extends !) the dependency introducing a local extension
+   \end{itemize}
+\end{frame}
+
+\section{Data Class}
+\subsection{Data Class}
+\begin{frame}
+  \frametitle{Data Class}
+  \begin{itemize}
+	\item<+-> Data holder with set / get methods and no behaviour..
+	\item<+-> Encapsulate fields, move methods and / or put things in a way that they can receive responsibility..
+   \end{itemize}
+\end{frame}
+
+\subsection{Encapsulate field}
+\begin{frame}
+  \frametitle{Encapsulate field}
+  \begin{itemize}
+	\item<+-> Data hiding is a principal tenet of OO..because behavior should aways lie where data is!
+	\item<+-> Making public fields permits data modification from objects different from data owner..(i.e. data is separated from behavior)
+	\item<+-> When data and behavior are clustered togheter in a single point you can change behaviour in a simpler way.. 
+	\item<+-> \textit{Encapsulate field} is the first baby step to keep information hiding.. other moves like \textit{Move Method} follow..
+   \end{itemize}
+\end{frame}
+
+\section{Encapsulate collection}
+\subsection{Encapsulate collection}
+\begin{frame}
+  \frametitle{Encapsulate collection}
+  \begin{itemize}
+	\item<+-> When a class contains collections, can give access to them throug setter or getter..
+	\item<+-> Getters should return unmodifiable version of the collection to avoid clients to modify it.. the owner class can not be aware of changes
+	\item<+-> Setters should be avoided. To access collection (i.e. add, remove and so on..) shoulb be demanded to the owner class.
+   \end{itemize}
+\end{frame}
+
+\subsection{Remove setting method}
+\begin{frame}
+  \frametitle{Remove setting method}
+  \begin{itemize}
+	\item<+-> ``A field should be set at creation time and never altered!''
+	\item<+-> ..declare field as final and init it at creation time.
+	\item<+-> The message is clear to other programmers and you avoid unexpected behavior with separating data from behavior as public fields
+   \end{itemize}
+\end{frame}
+
+\subsection{Hide Method}
+\begin{frame}
+  \frametitle{Hide Method}
+  \begin{itemize}
+	\item<+-> Relax visibility of a metod is a simple thing.. the other way around is more difficult (..nowaday we have automatic toold that can do this)
+	\item<+-> If a method is not used hide it making private.. 
+	\item<+-> This can be a first step to delete the whole method or to mitigate problems like direct access to data (i.e. hiding setter / getter)
+   \end{itemize}
+\end{frame}
+
+\section{Refused Bequest}
+\subsection{Refused Bequest}
+\begin{frame}
+  \frametitle{Refused Bequest}
+  \begin{itemize}
+	\item<+-> A child don't want behavior inherited from parent... the hierarchy is wrong
+	\item<+-> You need to create a sibling and use \textit{Push Down Method}, \textit{Push Down Field} to move undesidered behavior
+	\item<+-> In this way all the common behavior is the parent (.. and probably he is also abstract..)
+   \end{itemize}
+\end{frame}
+
+\subsection{Push Down Method}
+\begin{frame}
+  \frametitle{Push Down Method}
+  \begin{itemize}
+	\item<+-> A behavior is relevant only to a specific subclass
+	\item<+-> Move in the appropriate subclass
+   \end{itemize}
+\end{frame}
+
+\subsection{Push Down Field}
+\begin{frame}
+  \frametitle{Push Down Field}
+  \begin{itemize}
+	\item<+-> A field is used only by some subclasses.
+	\item<+-> Move the field to those subclasses
+   \end{itemize}
+\end{frame}
+
+\section{Comments}
+\subsection{Comments}
+\begin{frame}
+  \frametitle{Comments}
+  \begin{itemize}
+	\item<+-> A comment is often a deodorant to bad code..
+	\item<+-> You need it when things aren't clear.. 
+	\item<+-> Applying refactors like \textit{Extract Method}, \textit{Rename Method} or \textit{Introduce Assertion} make comment often superfluos
+   \end{itemize}
+\end{frame}
+
+\subsection{Introduce Assertion}
+\begin{frame}
+  \frametitle{Introduce Assertion}
+  \begin{itemize}
+	\item<+-> To explicit an assumption in the code consider to introduce an assertion instead of comments..  
+	\item<+-> Assertions in java are tricky..
+   \end{itemize}
+\end{frame}
+\end{document}
