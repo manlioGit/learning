@@ -14,6 +14,8 @@ public class HtmlController implements Controller {
 
 	@Override
 	public void execute(Context context) throws Exception {
+
+	    context.response().setContentType("text/html;charset=UTF-8");
 		
 		new ResponseWrapper(context.response()).render(new Html(new CourseRepository().get()));
 	}
