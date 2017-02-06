@@ -1,0 +1,182 @@
+%
+% -- Manlio Modugno
+
+\documentclass{beamer} 
+\usepackage{eulervm}
+%\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{bold-extra}
+\usepackage{cancel}
+\usepackage{fancybox}
+\usepackage{soul}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amsmath}
+%\hypersetup{colorlinks=true,urlcolor=blue}
+
+\newcommand{\codefont}{\fontsize{6}{8}\selectfont}
+\lstset{language=[Sharp]C, 
+captionpos=b, 
+frame=lines,
+lineskip= 1pt, %space between lines
+basicstyle=\codefont, 
+keywordstyle=\color{blue}, 
+commentstyle=\color{green}, 
+stringstyle=\color{red}, 
+numbers=left, 
+numberstyle=\tiny, 
+stepnumber=2,
+numbersep=5pt,
+breaklines=true, 
+breakatwhitespace=false,
+showstringspaces=false,
+frame=single,
+tabsize=2,
+emph={double,bool,int,unsigned,char,true,false,void},
+emphstyle=\color{blue},
+emph={Assert,Test},
+emphstyle=\color{red},
+emph={[2]\using,\#define,\#ifdef,\#endif},
+emphstyle={[2]\color{blue}}
+}
+
+
+\mode<presentation>
+\definecolor{title_color}{RGB}{2,128,181} 
+\usetheme{Ilmenau}
+\usecolortheme[named=title_color]{structure}
+\setbeamercolor{palette quaternary}{use=structure,fg=black,bg=white} %header footer color
+\useoutertheme[subsection=false]{smoothbars}
+\setbeamercovered{transparent}
+\setbeamertemplate{navigation symbols}{}
+\setbeamerfont{subsection in toc}{size=\scriptsize}
+
+\title{Why getter and setter methods are evil}
+\author{Manlio Modugno}
+\institute[GMTechnologies] 
+
+\date[12.01.2017] 
+{12.01.2017 - Why getter and setter methods are evil}
+
+\subject{}
+
+\graphicspath{{img/}}
+\pgfdeclareimage[height=0.6cm]{mfg-logo}{img/mfgLogo}
+\logo{\pgfuseimage{mfg-logo}}
+
+%
+% Content start
+%
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Argomenti Trattati}
+  \tableofcontents
+\end{frame}
+
+
+\section{On the nature of design}
+\begin{frame}
+  \frametitle{On the nature of design}
+  \begin{itemize}
+	\item<+-> A particular concept doesn't imply goodness or badness (i.e. never use 'extends')
+	\item<+-> Design (is the code.. remember!) is't a matter of choice... which has bad and good side on a particular context
+	\item<+-> ..like 'extends' setter / getter can have problems.. but this is not a reason to never use them..
+	\item<+-> A thing you should never do is to program blindly...evaluate every choice (e.g. db, os, program lang, and so on..) that better fit in your context (i.e. open your eyes)
+   \end{itemize}
+\end{frame}
+
+\section{Data abstraction}
+\begin{frame}
+  \frametitle{Data abstraction}
+  \begin{itemize}
+	\item<+-> Fundamental OO precept: an object doesn't expose any of its implementation details..
+	\item<+-> ..we can change implementation without affecting external users (i.e. local changes)
+	\item<+-> Getter and setter provide a way to access internal details!
+   \end{itemize}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+	\frametitle{Data abstraction (example)}
+	Suppose many calls like this exists in your code base \\
+	\begin{lstlisting}
+	...
+	int x = new X().getX();
+	...
+	\end{lstlisting}
+	If you need \textbf{to change} return type\\
+	\begin{lstlisting}
+	...
+	long x = new X().getX();
+	...
+	\end{lstlisting}
+	You have some problem.. the \textbf{change of your code is more expensive}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Data abstraction}
+  \begin{itemize}
+	\item<+-> Always hide direct access/internal implementation to external user.
+	\item<+-> private modifier is a way to achieve this...
+	\item<+-> Ideally we should always make changes to our code changing internal implementation without impacting any user of the class we are changing...
+	\item<+-> We want to limit the effects of a change to a single class definition
+   \end{itemize}%
+\end{frame}
+
+\begin{frame}
+  \frametitle{Data abstraction}
+  \begin{itemize}
+	\item<+-> It's best to minimize data movement as much as possible (remember: put behavior where is data!)
+	\item<+-> Author says that ``..maintainability is inversely proportionate to the amount of data that moves between objects..''
+	\item<+-> Focusing on \textit{what} you have to do and not on \textit{how} it's a good way to remove some setter/getter
+	\item<+-> \textbf{Tell don't ask principle:} ``Don't ask for the information you need to do the work; ask the object that has the information to do the work for you''
+   \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Data abstraction}
+  \begin{itemize}
+	\item<+-> A reason which causes setter/getter presence in the code is to don't think about dynamic model (i.e. messages between object at runtime)
+	\item<+-> ..but thinking only to a static model..
+	\item<+-> Massive use of setter/getter is a sing of procedural code..
+   \end{itemize}
+\end{frame}
+
+\section{Draw thyself}
+\begin{frame}
+  \frametitle{Draw thyself}
+  \begin{itemize}
+	\item<+-> A difference exists with getXYZ where xyz is some complex, but still \textbf{abstract} element..
+	\item<+-> We don't access internal details, but we have complex things that can change in a single place.. 
+	\item<+-> We have isolated business logic from subsystem's mechanincs (UI example)
+	\item<+-> Interface between 'procedural layer' often require setter/getter
+   \end{itemize}
+\end{frame}
+
+\section{A design strategy}
+\begin{frame}
+  \frametitle{A design strategy}
+  \begin{itemize}
+	\item<+-> CRC is a design startegy build to avoid setter/getter uses
+	\item<+-> \textbf{Class:} name of theh class
+	\item<+-> \textbf{Responsibilities:} what instances do. Focus on a \textit{single} area of expertise
+	\item<+-> \textbf{Collaborators:} Other instances that talk with this one. (As small as possible) 
+   \end{itemize}
+\end{frame}
+
+\section{Summing up}
+\begin{frame}
+  \frametitle{Summing up}
+  \begin{itemize}
+	\item<+-> Don't use setter/getter unless absolute necessary ...(remember? It's a bad smell..)
+	\item<+-> ..they expose internal information and this bring to system that is hasr to maintain
+	\item<+-> A procedural approach in problem solving bring to an heavy presence of setter / getter..
+	\item<+-> ..an OO system is like a conversation between instances that have well defined responsibilities
+   \end{itemize}
+\end{frame}
+
+\end{document}
