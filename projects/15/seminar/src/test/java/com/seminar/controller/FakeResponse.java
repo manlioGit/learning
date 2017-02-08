@@ -2,7 +2,9 @@ package com.seminar.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
@@ -12,6 +14,25 @@ public class FakeResponse implements HttpServletResponse {
 
 	private final FakeWriter _writer = new FakeWriter();
 	private String _contentType = "";
+	private final Map<String, String> _header = new HashMap<String, String>();
+	private int _status;
+	
+	public String content() {
+		return _writer.content();
+	}
+
+	public Map<String, String> header(){
+		return _header;
+	}
+	
+	public Integer status() {
+		return _status;
+	}
+	
+	@Override
+	public void setStatus(int arg0) {
+		_status = arg0;
+	}
 	
 	@Override
 	public PrintWriter getWriter() throws IOException {
@@ -28,10 +49,10 @@ public class FakeResponse implements HttpServletResponse {
 		return _contentType;
 	}
 	
-	public String getContent() {
-		return _writer.content();
+	@Override
+	public void setHeader(String arg0, String arg1) {
+		_header.put(arg0, arg1);
 	}
-
 	
 	@Override
 	public void flushBuffer() throws IOException {
@@ -184,19 +205,7 @@ public class FakeResponse implements HttpServletResponse {
 	}
 
 	@Override
-	public void setHeader(String arg0, String arg1) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void setIntHeader(String arg0, int arg1) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setStatus(int arg0) {
 		// TODO Auto-generated method stub
 
 	}

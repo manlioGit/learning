@@ -2,9 +2,7 @@ package com.seminar.controller;
 
 import com.seminar.route.Context;
 
-public interface Controller {
+public interface Method {
 
-	boolean handles(String url);
-	
 	void execute(Context context) throws Exception;
 }

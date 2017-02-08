@@ -12,6 +12,12 @@
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>7.1.6.v20100715</version>
+				<configuration>
+					<scanIntervalSeconds>1</scanIntervalSeconds>
+					<scanTargets>
+						<scanTarget>target/classes</scanTarget>
+					</scanTargets>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -22,6 +28,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>ROOT</finalName>
 	</build>
 	<dependencies>
 		<dependency>
@@ -32,7 +39,7 @@
 		<dependency>
 			<groupId>com.github.manliogit</groupId>
 			<artifactId>javatags</artifactId>
-			<version>0.3</version>
+			<version>0.3.1</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -45,6 +52,11 @@
 			<artifactId>hamcrest-all</artifactId>
 			<version>1.3</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.5</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sourceforge.htmlunit</groupId>

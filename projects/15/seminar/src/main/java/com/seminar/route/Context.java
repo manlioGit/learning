@@ -24,5 +24,21 @@ public class Context {
 	public HttpServletResponse response() {
 		return _response;
 	}
+	
+	public String requestUri() {
+		return _request.getRequestURI();
+	}
+
+	public boolean post(String route) {
+		return matches("POST", route);
+	}
+
+	public boolean get(String route) {
+		return matches("GET", route);
+	}
+	
+	private boolean matches(String method, String route){
+		return _request.getMethod().equals(method) && requestUri().equals(route);
+	}
 
 }

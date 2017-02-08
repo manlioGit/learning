@@ -16,6 +16,24 @@ import javax.servlet.http.HttpSession;
 
 public class FakeRequest implements HttpServletRequest {
 
+	private final String _requestUri;
+	private final String _method;
+
+	public FakeRequest(String requestUri, String method) {
+		_requestUri = requestUri;
+		_method = method;
+	}
+	
+	@Override
+	public String getRequestURI() {
+		return _requestUri;
+	}
+	
+	@Override
+	public String getMethod() {
+		return _method;
+	}
+	
 	@Override
 	public Object getAttribute(String arg0) {
 		// TODO Auto-generated method stub
@@ -239,12 +257,6 @@ public class FakeRequest implements HttpServletRequest {
 	}
 
 	@Override
-	public String getMethod() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public String getPathInfo() {
 		// TODO Auto-generated method stub
 		return null;
@@ -264,12 +276,6 @@ public class FakeRequest implements HttpServletRequest {
 
 	@Override
 	public String getRemoteUser() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getRequestURI() {
 		// TODO Auto-generated method stub
 		return null;
 	}
