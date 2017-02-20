@@ -15,6 +15,7 @@ public class ResponseWrapper {
 	public void render(View view){
 		try {
 			_response.getWriter().write(view.render());
+			_response.getWriter().flush();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

@@ -15,4 +15,15 @@ public class Format {
 	public static String component(Integer token){
 		return component(token.toString());
 	}
+	
+	public static boolean match(String route, String url){
+		try {
+			String[] routeComponents = route.split("/");
+			String[] urlComponents = url.split("/");
+			
+			return  routeComponents[1].equals(urlComponents[1]);
+		} catch (ArrayIndexOutOfBoundsException e) {
+			return false;
+		}
+	}
 }

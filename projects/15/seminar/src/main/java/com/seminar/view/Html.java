@@ -2,6 +2,7 @@ package com.seminar.view;
 
 import static com.github.manliogit.javatags.lang.HtmlHelper.body;
 import static com.github.manliogit.javatags.lang.HtmlHelper.div;
+import static com.github.manliogit.javatags.lang.HtmlHelper.group;
 import static com.github.manliogit.javatags.lang.HtmlHelper.head;
 import static com.github.manliogit.javatags.lang.HtmlHelper.html5;
 import static com.github.manliogit.javatags.lang.HtmlHelper.li;
@@ -13,18 +14,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.manliogit.javatags.element.Element;
-import com.github.manliogit.javatags.element.Group;
 import com.seminar.model.entity.Course;
 import com.seminar.model.entity.Student;
 
 public class Html implements View {
 
-	private Course _course;
+	private final Course _course;
 
 	public Html(Course course) {
 		_course = course;
 	}
 
+	
 	@Override
 	public String render() {
 		
@@ -47,7 +48,7 @@ public class Html implements View {
 				     li(text(_course.getTime().toString()))
 				   ),
 				   div("partecipanti:"),
-				   ul(new Group(items))
+				   ul(group(items))
 			     )
 			   ).render();
 	}
