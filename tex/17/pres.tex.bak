@@ -95,16 +95,15 @@ emphstyle={[2]\color{blue}}
   \frametitle{Description}
   \begin{itemize}
 	\item<+-> \textit{open for extension}: An entity can be extended (i.e. changed) with new behaviors
-	\item<+-> \textit{closed for modification}: Extending an entity doesn't require code modification (or minimal one...)
+	\item<+-> \textit{closed for modification}: Extending an entity doesn't require existing code modification (or minimal one...)
    \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{Description}
   \begin{itemize}
-	\item<+-> They seems contrast definitions... how to change behavior of an entity without modifying it? 
-	\item<+-> A way, in OOP, is to use abstraction.. think about to an abstract class and all possible derivative implementations..
-	\item<+-> 
+	\item<+-> They seems conflicting definitions... how to change behavior of an entity without modifying it? 
+	\item<+-> A way, in OOP, is to use abstraction.. think about to an abstract class and all possible derivative implementations.. 
    \end{itemize}
 \end{frame}
 
@@ -167,11 +166,11 @@ emphstyle={[2]\color{blue}}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Shape Application OCP violation}
+  \frametitle{Shape Application: problems / consequences}
   \begin{itemize}
 	\item<+-> ...can exist pathological situation also, where a particular branch acts exactly as another one, local ``simplification'', and so on...
 	\item<+-> in large application a modification like that require a complete redeploy..
-	\item<+-> example: in SIS a decoupled modification permits an hot deploy without require a jboss
+	\item<+-> example: in SIS a decoupled modification permits an hot deploy without requiring a jboss restart
 	\item<+-> adding a new element is really expensive (do you remember SIS?)
 	\item<+-> We can't reuse \textit{DrawAllShapes} without bringing the inner Shapes used $ \rightarrow $ immobility
    \end{itemize}
@@ -218,6 +217,7 @@ contexts} ''
    \end{itemize}
 \end{frame}
 
+\subsection{Black/White art}
 \begin{frame}
   \frametitle{Black/White art}
   \begin{itemize}
@@ -229,6 +229,7 @@ contexts} ''
    \end{itemize}
 \end{frame}
 
+\subsection{Needless Complexity}
 \begin{frame}
   \frametitle{Needless Complexity}
   \begin{itemize}
@@ -239,6 +240,7 @@ contexts} ''
    \end{itemize}
 \end{frame}
 
+\subsection{Shape Application, new requirement}
 \begin{frame}
   \frametitle{Shape Application, new requirement}
   \begin{itemize}
@@ -262,8 +264,6 @@ shape.Draw();
 	\end{lstlisting}
 \end{frame}
 
-
-
 \section{Conclusion}
 \begin{frame}
   \frametitle{Conclusion}
@@ -275,13 +275,4 @@ shape.Draw();
    \end{itemize}
 \end{frame}
 
-\subsection{Conclusion}
-\begin{frame}
-  \frametitle{Conclusion}
-  \begin{itemize}
-	\item<+-> SRP is one of the simplest of the principles, and one of the hardest to get right (i.e. achieving simplicity can be very tricky)
-	\item<+-> Conjoining responsibilities is something that we do naturally..
-	\item<+-> Finding and separating those responsibilities from one another is much of what software design is really about
-   \end{itemize}
-\end{frame}
 \end{document}
