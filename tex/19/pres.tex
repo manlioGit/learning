@@ -138,9 +138,7 @@ class Timer{
     void register(int timeOut, TimerClient tc){
         ...
         Thread.sleep(timeOut);
-        if(tc.isDoorOpen()){
-            tc.timeOut();
-        }
+        tc.timeOut();
         ...
     }
 }
@@ -154,6 +152,25 @@ class Timer{
 	\item<+-> ..we could have degenerate solutions violating LSP..\\
 	\item<+-> Interface is polluted with a method that does not require.. introduced to satisfy a particular need..
    \end{itemize}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+	\frametitle{Interface Pollution}
+	Example of problems...to avoid false alarms a uuid can be introduced.. forcing all the client to suffer a bug ... \\
+	\begin{lstlisting}
+void xxx(){
+   
+   if(timedDoor.isOpen()){
+    
+     new Timer().register(5, timedDooor)
+
+    }
+
+    ....
+    timedDoor.close()
+
+}
+	\end{lstlisting}
 \end{frame}
 
 \section{Separate Clients Mean Separate Interfaces}
@@ -171,10 +188,10 @@ class Timer{
 
 \section{Class Interfaces versus Object Interfaces}
 \subsection{Class Interfaces versus Object Interfaces}
-\begin{frame}[containsverbatim]
-	\frametitle{Class Interfaces versus Object Interfaces}
+\begin{frame}
+  \frametitle{Class Interfaces versus Object Interfaces}
   \begin{itemize}
-	\item<+-> \textit{TimedDoor} has two interfaces used by separate clients: \textit{Timer} and users of \textit{Door}..
+	\item<+-> \textit{TimedDoor} has two interfaces used by separate clients: \textit{Timer} (through register method) and users of \textit{Door}..
 	\item<+-> Those must be implemented in the same object, since implementations manipulate same data..
 	\item<+-> But how to do it respecting ISP?.. How to separate interfaces when they must remain together?
 	\item<+-> Answer is that client don't need to access an object through an interface; they can access it through delegation or through a base class.
@@ -199,6 +216,51 @@ class Timer{
 	\item<+-> Is a general purpose solution but has a little overhead...
    \end{itemize}
 \end{frame}
+
+\begin{frame}[containsverbatim]
+	\frametitle{Separation Through Delegation}
+	\begin{lstlisting}
+public interface TimedDoor : Door{
+	void DoorTimeOut(int timeOutId);
+}
+public class DoorTimerAdapter : TimerClient{
+	private TimedDoor timedDoor;
+	public DoorTimerAdapter(TimedDoor theDoor){
+		timedDoor = theDoor;
+	}
+	public virtual void TimeOut(int timeOutId){
+		timedDoor.DoorTimeOut(timeOutId);
+	}
+}
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+	\frametitle{Separation Through Delegation}
+	Example 
+	\begin{lstlisting}
+void xxx(){
+   
+   if(timedDoor.isOpen()){
+    
+     new Timer().register(5, timedDooor.create())
+
+    }
+
+    ....
+    timedDoor.close()
+
+}
+
+class TimedDoor : Door{
+,,,
+	DoorTimerAdapter create(){
+		return new DoorTimerAdapter(this);
+	}
+}
+	\end{lstlisting}
+\end{frame}
+
 
 \subsection{Separation Through Multiple Inheritance}
 \begin{frame}
