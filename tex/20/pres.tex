@@ -91,15 +91,6 @@ emphstyle={[2]\color{blue}}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Intro}
-	Example of hierarchy dependency.
-	\begin{center}
-	\fbox{\includegraphics[scale=0.2]{ispBad}}
-	\end{center}
-\end{frame}
-
-
-\begin{frame}
   \frametitle{Intro}
   \begin{itemize}
 	\item<+-> High-level modules contain important policy decision and business models.. (i.e. ``identity'' of an application)
@@ -213,6 +204,80 @@ public class Button{
 	\begin{center}
 	\fbox{\includegraphics[scale=0.2]{dipExampleGood}}
 	\end{center}
+\end{frame}
+
+\section{The Furnace example}
+\subsection{Furnace Example}
+\begin{frame}
+  \frametitle{The Furnace example}
+  \begin{itemize}
+	\item<+-> Consider software controlling a furnace.. 
+	\item<+-> Software can read current temperature and instruct furnace to turn on/off
+   \end{itemize}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+	\frametitle{A simple DIP example}
+	An example that has a lot of low-level details $ \rightarrow $ can't be reused with different control hardware \\
+	\begin{lstlisting}
+const byte TERMOMETER = 0x86;
+const byte FURNACE = 0x87;
+const byte ENGAGE = 1;
+const byte DISENGAGE = 0;
+void Regulate(double minTemp, double maxTemp) {
+	for(;;){
+		while (in(THERMOMETER) > minTemp)
+			wait(1);
+		out(FURNACE,ENGAGE);
+		
+		while (in(THERMOMETER) < maxTemp)
+			wait(1);
+		out(FURNACE,DISENGAGE);
+	}
+}
+	\end{lstlisting}
+	This code violates DIP. High-level policies are not separated from lower ones. Button handles only Lamp
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{A generic solution}
+	\begin{center}
+	\fbox{\includegraphics[scale=0.2]{furnace}}
+	\end{center}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+	\frametitle{A simple DIP example}
+	Regualate takes two interfaces as arguments. High-level regulation policies now do not depends on any specific details.. \\
+	\begin{lstlisting}
+void Regulate(Thermometer t, Heater h, double minTemp, double maxTemp){
+	for(;;){
+		while (t.Read() > minTemp)
+			wait(1);
+		h.Engage();
+
+		while (t.Read() < maxTemp)
+			wait(1);
+		h.Disengage();
+	}
+}
+	\end{lstlisting}
+	This code violates DIP. High-level policies are not separated from lower ones. Button handles only Lamp
+\end{frame}
+
+\section{Conclusion}
+\subsection{Conclusion}
+\begin{frame}
+  \frametitle{Conclusion}
+  \begin{itemize}
+	\item<+-> Programming can creates a dependency structure in which policy depends on detail
+	\item<+-> OOP can invert dependency and mitigate problem on change of details..
+	\item<+-> Inversion of dependencies is the hallmark of good object-oriented design (i.e. get the metaphor under the metaphor..)
+	\item<+->  It doesn't matter what language a program is written in..OO is OO
+	\item<+-> DIP is the fundamental low-level mechanism behind many of the benefits claimed for object-oriented technology
+	\item<+-> It is critically important for the construction of code that is resilient to change
+   \end{itemize}
 \end{frame}
 
 \end{document}
