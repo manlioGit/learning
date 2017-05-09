@@ -86,7 +86,7 @@ emphstyle={[2]\color{blue}}
 	\item<+-> def A: \textbf{High-level modules should not depend on low-level modules. Both should depend on abstractions}
 	\item<+-> def B: \textbf{Abstractions should not depend upon details. Details should depend upon abstractions}
 	\item<+-> Why ``inversion''?..
-	\item<+-> Because traditional sd approaches create high-level modules that depend on low-level ones and polocies that depend upon details.. a good OOD inverts the dependency...
+	\item<+-> Because traditional sd approaches create high-level modules that depend on low-level ones and policies that depend upon details.. a good OOD inverts the dependency...
    \end{itemize}
 \end{frame}
 
@@ -236,7 +236,6 @@ void Regulate(double minTemp, double maxTemp) {
 	}
 }
 	\end{lstlisting}
-	This code violates DIP. High-level policies are not separated from lower ones. Button handles only Lamp
 \end{frame}
 
 
@@ -263,7 +262,6 @@ void Regulate(Thermometer t, Heater h, double minTemp, double maxTemp){
 	}
 }
 	\end{lstlisting}
-	This code violates DIP. High-level policies are not separated from lower ones. Button handles only Lamp
 \end{frame}
 
 \section{Conclusion}
