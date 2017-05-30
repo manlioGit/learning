@@ -41,7 +41,6 @@ emph={[2]\using,\#define,\#ifdef,\#endif},
 emphstyle={[2]\color{blue}}
 }
 
-
 \mode<presentation>
 \definecolor{title_color}{RGB}{2,128,181} 
 \usetheme{Ilmenau}
@@ -56,7 +55,7 @@ emphstyle={[2]\color{blue}}
 \author{Manlio Modugno}
 \institute[GMTechnologies] 
 
-\date[]{OOAD}
+\date[]{Case Studies / Use Cases}
 
 \subject{}
 
@@ -83,34 +82,44 @@ emphstyle={[2]\color{blue}}
 \begin{frame}
   \frametitle{Intro}
   \begin{itemize}
-	\item<+-> ``owning a hammer doesn't make one an architect''..
-	\item<+-> i.e. knowing a programming language doesn't imply to be an OO programmer..
-	\item<+-> UML id different from ``thinking in objects''... UML is a (visual) tool...
-	\item<+-> Assign responsibility, spot collaboration.. are critical in OOA/D
+	\item<+-> Focus on core layer because is cross technology 
+	\item<+-> Acquired skills in core layer are usable in others too..
+	\item<+-> ..mutating technologies / framework continue to arise... probably nowadays you would use a sparkling framework..
+	\item<+-> ..or probably you should face with legacy running systems! 
    \end{itemize}
 \end{frame}
 
-\section{Most Important Learning Goal}
-\subsection{Most Important Learning Goal}
+\section{Case Studies}
+\subsection{Case One: The NextGen POS System}
 \begin{frame}
-  \frametitle{Most Important Learning Goal}
+  \frametitle{Case One: The NextGen POS System}
   \begin{itemize}
-	\item<+-> \textbf{A critical ability in OO development is to skillfully assign responsibilities to software objects}
-	\item<+-> We'll see 9 fundamental principles ... GRASP patterns
+	\item<+-> A POS system is a computerized application used (in part) to record sales and handle payments
+	\item<+-> It interfaces to various service applications
+	\item<+-> These systems must be relatively fault-tolerant
+	\item<+-> Supports various client-side terminals (web / pc / and so on..) 
+	\item<+-> Must be flexible with respect to various clients with disparate needs in terms of business rule processing
    \end{itemize}
 \end{frame}
 
-%\section{What is Analysis and Design?}
-\subsection{What is Analysis and Design?}
+\subsection{Case Two: The Monopoly Game System}
 \begin{frame}
-	\frametitle{Layering}
+	\frametitle{Case Two: The Monopoly Game System}
   	\begin{itemize}
-	\item<+-> Analysis is an investigation of the problem and requirements...
-	\item<+-> Design is a (conceptual) solution that fulfills the requirements.. 
-	\item<+-> ``..do the right thing (analysis), and do the thing right (design)..''
-	\item<+-> In OO analysis find and describe concepts in the domain problem (e.g. Flight, Plane, etc)
-	\item<+-> In OO design define software objects and how they collaborate to fulfill requirements
-	\item<+-> Remember OODesign = OOProgramming !
+	\item<+-> OOA/D apply to very different problems.. Monopoly game
+	\item<+-> Domain modeling, Object design and UML are still relevant and useful
+	\item<+-> The software version of the game will run as a simulation
+   \end{itemize}
+\end{frame}
+
+\section{Use Cases}
+\subsection{Use Cases}
+\begin{frame}
+	\frametitle{Case Two: The Monopoly Game System}
+  	\begin{itemize}
+	\item<+-> OOA/D apply to very different problems.. Monopoly game
+	\item<+-> Domain modeling, Object design and UML are still relevant and useful
+	\item<+-> The software version of the game will run as a simulation
    \end{itemize}
 \end{frame}
 
@@ -181,21 +190,31 @@ In addition to the dynamic view, a static one can be created.. this is different
 \begin{frame}
 	\frametitle{"Silver Bullet" Thinking}
 	\begin{itemize}
-		\item<+-> There is no special tool or technique in software that will make a dramatic order-of-magnitude difference in productivity, defect reduction, reliability, or simplicity. 
-		\item<+-> \textbf{UML as blueprint:} detailed diagrams for reverse / forward engineering
-		\item<+-> \textbf{UML as programming language:} complete executable specification
-		\item<+-> ...we use \textit{UML as sketch}
+    \item<+-> ``There is no special tool or technique in software that will make a dramatic order-of-magnitude difference in productivity, defect reduction, reliability, or simplicity.''
+    \item<+->  ``Tools don't compensate design ignorance''
+    \item<+-> A person not having good OO design and programming skills who draws UML is just drawing bad designs
     \end{itemize}
-	\item There is no special tool or technique in software that will make a dramatic order-of-magnitude difference in productivity, defect reduction, reliability, or simplicity. 
-   \item  Tools don't compensate design ignorance
 \end{frame}
 
 \subsection{Three Perspectives to Apply UML}
 \begin{frame}
 	\frametitle{Three Ways to Apply UML}
+	The same UML diagram notation can be used for different areas..
 	\begin{itemize}
-		\item<+-> We use \textit{UML as sketch}
+		\item<+-> \textbf{Conceptual perspective:} describe things in real world or in a domain of interest 
+		\item<+-> \textbf{Specification (software) perspective:} describe software abstraction/components ignoring particular language implementation
+		\item<+-> \textbf{Implementation (software) perspective:} describe software implementation using a program language
     \end{itemize}
 \end{frame}
 
+\section{Visual Modeling is a Good Thing}
+\subsection{Visual Modeling is a Good Thing}
+\begin{frame}
+	\frametitle{Conclusion: Visual Modeling is a Good Thing}
+	\begin{itemize}
+		\item<+-> A visual model help us to grasp relationships between important element in a domain..
+		\item<+-> ...ignoring details or uninteresting concepts 
+		\item<+-> \textbf{Implementation (software) perspective:} describe software implementation using a program language
+    \end{itemize}
+\end{frame}
 \end{document}
