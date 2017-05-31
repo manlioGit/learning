@@ -41,6 +41,7 @@ emph={[2]\using,\#define,\#ifdef,\#endif},
 emphstyle={[2]\color{blue}}
 }
 
+
 \mode<presentation>
 \definecolor{title_color}{RGB}{2,128,181} 
 \usetheme{Ilmenau}
@@ -55,7 +56,7 @@ emphstyle={[2]\color{blue}}
 \author{Manlio Modugno}
 \institute[GMTechnologies] 
 
-\date[]{Case Studies / Use Cases}
+\date[]{OOAD}
 
 \subject{}
 
@@ -82,44 +83,34 @@ emphstyle={[2]\color{blue}}
 \begin{frame}
   \frametitle{Intro}
   \begin{itemize}
-	\item<+-> Focus on core layer because is cross technology 
-	\item<+-> Acquired skills in core layer are usable in others too..
-	\item<+-> ..mutating technologies / framework continue to arise... probably nowadays you would use a sparkling framework..
-	\item<+-> ..or probably you should face with legacy running systems! 
+	\item<+-> ``owning a hammer doesn't make one an architect''..
+	\item<+-> i.e. knowing a programming language doesn't imply to be a programmer..
+	\item<+-> UML id different from ``thinking in objects''... UML is a (visual) tool...
+	\item<+-> Assign responsibility, spot collaboration.. are critical in OOA/D
    \end{itemize}
 \end{frame}
 
-\section{Case Studies}
-\subsection{Case One: The NextGen POS System}
+\section{Most Important Learning Goal}
+\subsection{Most Important Learning Goal}
 \begin{frame}
-  \frametitle{Case One: The NextGen POS System}
+  \frametitle{Most Important Learning Goal}
   \begin{itemize}
-	\item<+-> A POS system is a computerized application used (in part) to record sales and handle payments
-	\item<+-> It interfaces to various service applications
-	\item<+-> These systems must be relatively fault-tolerant
-	\item<+-> Supports various client-side terminals (web / pc / and so on..) 
-	\item<+-> Must be flexible with respect to various clients with disparate needs in terms of business rule processing
+	\item<+-> \textbf{A critical ability in OO development is to skillfully assign responsibilities to software objects}
+	\item<+-> We'll see 9 fundamental principles ... GRASP patterns
    \end{itemize}
 \end{frame}
 
-\subsection{Case Two: The Monopoly Game System}
+%\section{What is Analysis and Design?}
+\subsection{What is Analysis and Design?}
 \begin{frame}
-	\frametitle{Case Two: The Monopoly Game System}
+	\frametitle{Layering}
   	\begin{itemize}
-	\item<+-> OOA/D apply to very different problems.. Monopoly game
-	\item<+-> Domain modeling, Object design and UML are still relevant and useful
-	\item<+-> The software version of the game will run as a simulation
-   \end{itemize}
-\end{frame}
-
-\section{Use Cases}
-\subsection{Use Cases}
-\begin{frame}
-	\frametitle{Case Two: The Monopoly Game System}
-  	\begin{itemize}
-	\item<+-> OOA/D apply to very different problems.. Monopoly game
-	\item<+-> Domain modeling, Object design and UML are still relevant and useful
-	\item<+-> The software version of the game will run as a simulation
+	\item<+-> Analysis is an investigation of the problem and requirements...
+	\item<+-> Design is a (conceptual) solution that fulfills the requirements.. 
+	\item<+-> ``..do the right thing (analysis), and do the thing right (design)..''
+	\item<+-> In OO analysis find and describe concepts in the domain problem (e.g. Flight, Plane, etc)
+	\item<+-> In OO design define software objects and how they collaborate to fulfill requirements
+	\item<+-> Remember OODesign = OOProgramming !
    \end{itemize}
 \end{frame}
 
