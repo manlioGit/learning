@@ -115,106 +115,85 @@ emphstyle={[2]\color{blue}}
 \section{Use Cases}
 \subsection{Use Cases}
 \begin{frame}
-	\frametitle{Case Two: The Monopoly Game System}
-  	\begin{itemize}
-	\item<+-> OOA/D apply to very different problems.. Monopoly game
-	\item<+-> Domain modeling, Object design and UML are still relevant and useful
-	\item<+-> The software version of the game will run as a simulation
-   \end{itemize}
-\end{frame}
-
-\section{Example}
-\subsection{Example}
-\begin{frame}
-	\frametitle{Example: Dice game, define use cases}
+	\frametitle{Use Cases:}
 	\begin{itemize}
-	\item<+-> \textbf{Define Use Cases:} write stories/scenarios of how people use application
-	\item<+-> \textbf{Play a Dice Game:}  Player requests to roll the dice. System presents results: If the dice face value totals seven, player wins; otherwise, player loses 
-   \end{itemize}
+	\item<+-> Are text stories used to discover and record requirements
+	\end{itemize}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Example: Dice game, define a domain model}
-	\begin{itemize}
-	\item<+-> OOA creates a description of the domain from the perspective of objects..
-	\item<+-> ..identifies concepts, attributes and associations that are noteworthy
-   \end{itemize}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Example: Dice game, define a domain model}
-	A domain model is not a description of software objects! It's a visualization of real-world domain
+	\frametitle{Example: Process Sale}
 	\begin{center}
-	\fbox{\includegraphics[scale=0.2]{domainModel}}
+	A customer arrives at a checkout with items to purchase. The cashier uses
+the POS system to record each purchased item. The system presents a running total and
+line-item details. The customer enters payment information, which the system validates and
+records. The system updates inventory. The customer receives a receipt from the system
+and then leaves with the items
 	\end{center}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Example: Dice game, assign object responsibilities, draw interaction diagram}
-	OO Design defines software objects and their responsibilities and collaborations. Keep in mind the 
-	difference between real world and software one.. ``Software object designs and programs do take some inspiration from real-world domains, but they are not direct models or simulations of the real world''
-	\begin{center}
-	\fbox{\includegraphics[scale=0.2]{interaction}}
-	\end{center}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Example: Dice game, define design class diagrams}
-In addition to the dynamic view, a static one can be created.. this is different from the diagram depicted in domain model phase..but also similar..lower representational gap
-	\begin{center}
-	\fbox{\includegraphics[scale=0.2]{classDiagram}}
-	\end{center}
-\end{frame}
-
-\section{What is UML?}
-\subsection{What is UML?}
-\begin{frame}
-	\frametitle{What is UML?}
+	\frametitle{Use Cases:}
 	\begin{itemize}
-		\item<+-> \textbf{def.} is a visual language for specifying, constructing and documenting the artifacts of systems
+	\item<+-> use cases are not diagrams, they are text
+	\item<+-> target is to discover and record functional requirement that satisfy user's needs..
+	\item<+-> ..it's not so simple..!
+	\end{itemize}
+\end{frame}
+
+\subsection{What are Actors, Scenarios, and Use Cases?}
+\begin{frame}
+	\frametitle{What are Actors, Scenarios, and Use Cases?}
+	\begin{itemize}
+	\item<+-> \textbf{Actor:} is something with behavior.. person(role), computer system, ...
+	\item<+-> \textbf{Scenario(use case instance):} specific sequence of actions and interactions between actors and the system, a particular story/path in using the system
+	\item<+-> \textbf{Use case:} is a collection of related success and failure scenarios that describe
+an actor using a system to support a goal 
+	\end{itemize}
+\end{frame}
+
+\subsection{Use Cases and the Use-Case Model}
+\begin{frame}
+	\frametitle{Use Cases and the Use-Case Model}
+	\begin{itemize}
+		\item<+-> use-case modeling is an act of writing text, not drawing diagrams artifacts of systems
+		\item<+-> ..can include \textit{optionally} diagrams
+		\item<+-> There's no OOA/D in use case modeling.. but it's a key concept input to OOA/D
     \end{itemize}
 \end{frame}
 
+\subsection{Motivation: Why Use Cases?}
+\begin{frame}
+	\frametitle{Motivation: Why Use Cases?}
+	\begin{itemize}
+		\item<+-> Many ways exist to capture/describe goals..
+		\item<+-> But a simpler written text is preferable, because customer can actively participate..  
+		\item<+-> ...and this help in don't missing the point 
+		\item<+-> Lack of user involvement in software projects is near the top of the list of reasons for project failure
+		\item<+-> emphasize the user goals and perspective
+		\item<+-> ...keep it simple (as everything!).. write text stories
+    \end{itemize}
+\end{frame}
 
-\subsection{Three Ways to Apply UML}
+\subsection{Definition: Are Use Cases Functional Requirements?} 
+\begin{frame}
+	\frametitle{Definition: Are Use Cases Functional Requirements?}
+	\begin{itemize}
+    \item<+-> Use cases are requirements, primarily functional or behavioral requirements that indicate what
+the system will do
+    \item<+-> define a contract of how a system will behave
+    \end{itemize}
+\end{frame}
+
+\subsection{Definition: What are Three Kinds of Actors?}
 \begin{frame}
 	\frametitle{Three Ways to Apply UML}
+	Various actors can exist in a use case, can be roles like people, orgs, software and machines 
 	\begin{itemize}
-		\item<+-> \textbf{UML as sketch:} informal diagrams to \underline{explore} problems / existing solutions
-		\item<+-> \textbf{UML as blueprint:} detailed diagrams for reverse / forward engineering
-		\item<+-> \textbf{UML as programming language:} complete executable specification
-		\item<+-> ...we use \textit{UML as sketch}
+		\item<+-> \textbf{Primary actor:} has user goals fulfilled through using services of the system 
+		\item<+-> \textbf{Supporting actor:} provides a service to the system
+		\item<+-> \textbf{Offstage actor:} has an interest in the behavior of the use case
     \end{itemize}
 \end{frame}
 
-\begin{frame}
-	\frametitle{"Silver Bullet" Thinking}
-	\begin{itemize}
-    \item<+-> ``There is no special tool or technique in software that will make a dramatic order-of-magnitude difference in productivity, defect reduction, reliability, or simplicity.''
-    \item<+->  ``Tools don't compensate design ignorance''
-    \item<+-> A person not having good OO design and programming skills who draws UML is just drawing bad designs
-    \end{itemize}
-\end{frame}
-
-\subsection{Three Perspectives to Apply UML}
-\begin{frame}
-	\frametitle{Three Ways to Apply UML}
-	The same UML diagram notation can be used for different areas..
-	\begin{itemize}
-		\item<+-> \textbf{Conceptual perspective:} describe things in real world or in a domain of interest 
-		\item<+-> \textbf{Specification (software) perspective:} describe software abstraction/components ignoring particular language implementation
-		\item<+-> \textbf{Implementation (software) perspective:} describe software implementation using a program language
-    \end{itemize}
-\end{frame}
-
-\section{Visual Modeling is a Good Thing}
-\subsection{Visual Modeling is a Good Thing}
-\begin{frame}
-	\frametitle{Conclusion: Visual Modeling is a Good Thing}
-	\begin{itemize}
-		\item<+-> A visual model help us to grasp relationships between important element in a domain..
-		\item<+-> ...ignoring details or uninteresting concepts 
-		\item<+-> \textbf{Implementation (software) perspective:} describe software implementation using a program language
-    \end{itemize}
-\end{frame}
 \end{document}
