@@ -1,0 +1,261 @@
+%
+% -- Manlio Modugno
+
+\documentclass{beamer} 
+\usepackage{eulervm}
+%\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{bold-extra}
+\usepackage{cancel}
+\usepackage{fancybox}
+\usepackage{soul}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amsmath}
+%\hypersetup{colorlinks=true,urlcolor=blue}
+
+\newcommand{\codefont}{\fontsize{6}{8}\selectfont}
+\lstset{language=[Sharp]C, 
+captionpos=b, 
+frame=lines,
+lineskip= 1pt, %space between lines
+basicstyle=\codefont, 
+keywordstyle=\color{blue}, 
+commentstyle=\color{green}, 
+stringstyle=\color{red}, 
+numbers=left, 
+numberstyle=\tiny, 
+stepnumber=2,
+numbersep=5pt,
+breaklines=true, 
+breakatwhitespace=false,
+showstringspaces=false,
+frame=single,
+tabsize=2,
+emph={double,bool,int,unsigned,char,true,false,void},
+emphstyle=\color{blue},
+emph={Assert,Test},
+emphstyle=\color{red},
+emph={[2]\using,\#define,\#ifdef,\#endif},
+emphstyle={[2]\color{blue}}
+}
+
+\mode<presentation>
+\definecolor{title_color}{RGB}{2,128,181} 
+\usetheme{Ilmenau}
+\usecolortheme[named=title_color]{structure}
+\setbeamercolor{palette quaternary}{use=structure,fg=black,bg=white} %header footer color
+\useoutertheme[subsection=false]{smoothbars}
+\setbeamercovered{transparent}
+\setbeamertemplate{navigation symbols}{}
+\setbeamerfont{subsection in toc}{size=\scriptsize}
+
+\title{Larman - OOA/D}
+\author{Manlio Modugno}
+\institute[GMTechnologies] 
+
+\date[]{Use Cases (continue)}
+
+\subject{}
+
+\graphicspath{{img/}}
+\pgfdeclareimage[height=0.6cm]{mfg-logo}{img/mfgLogo}
+\logo{\pgfuseimage{mfg-logo}}
+
+%
+% Content start
+%
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Topics}
+  \tableofcontents
+\end{frame}
+
+
+\section{Notation: What are Three Common Use Case Formats?}
+\subsection{Notation: What are Three Common Use Case Formats?}
+\begin{frame}
+  \frametitle{Notation: What are Three Common Use CaseFormats?}
+  \begin{itemize}
+	\item<+-> \textbf{brief:} short one-paragraph summary, usually of the main success scenario
+	\item<+-> \textbf{casual:} informal paragraphs that cover various scenarios
+	\item<+-> \textbf{fully dressed:} all steps and variations written in detail
+   \end{itemize}
+\end{frame}
+
+\section{Fully dressed template/sections}
+\subsection{Fully dressed template/sections}
+\begin{frame}
+  \frametitle{Fully dressed template/sections}
+  \begin{itemize}
+	\item<+-> a common template was created by Cockburn..
+   \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Fully dressed template/sections}
+  \begin{itemize}
+	\item<+-> Stakeholders and Interests $ \rightarrow $ `What should be in the use case?`
+	\item<+-> That which satisfies all the stakeholders' interests
+   \end{itemize}
+\end{frame}
+
+\subsection{Preface elements}
+\begin{frame}
+  \frametitle{Preface elements}
+  \begin{itemize}
+	\item<+-> \textbf{Scope:} bounds system(s) under design
+	\item<+-> \textbf{Primary actor:} who calls a system services to fulfill a goal
+	\item<+-> \textbf{Stakeholders and Interests:} suggests and bounds what the system must do..answers the question ``What should be in the use case?'' $ \rightarrow $ ``That which satisfies all the stakeholders' interests''. Helps in don't missing something/someone
+   \end{itemize}
+\end{frame}
+
+
+\subsection{Other elements}
+\begin{frame}
+  \frametitle{Other elements}
+  \begin{itemize}
+
+	\item<+-> \textbf{Preconditions:} state what must always be true before a scenario is begun in the use case
+	\item<+-> \textbf{Success guarantees (or postconditions):} state what must be true on successful completion of the use case
+	\item<+-> \textbf{Preconditions:} describes a typical success path that satisfies the interests of the stakeholders
+	\item<+-> \textbf{Extensions (or Alternate Flows):} indicate all the other scenarios or branches, both success and failure
+   \end{itemize}
+\end{frame}
+
+\subsection{final elements}
+\begin{frame}
+  \frametitle{final elements}
+  \begin{itemize}
+
+	\item<+-> \textbf{Special Requirements:} non-functional requirement such as performance, reliability, usability..
+	\item<+-> \textbf{Technology and Data Variations List:} tech variations related on \textit{how} something must be done such as i/o constraints..
+   \end{itemize}
+\end{frame}
+
+\section{Conclusion}
+\subsection{Congratulations: Use Cases are Written and Wrong (!)}
+\begin{frame}
+  \frametitle{Congratulations: Use Cases are Written and Wrong (!)}
+  \begin{itemize}
+
+	\item<+-> A long and detailed list of use cases doesn't give certainty about correctness of the system.. 
+	\item<+-> Only code and tests (can) say what is true or not!
+   \end{itemize}
+\end{frame}
+
+
+\section{Case Studies}
+\subsection{Case One: The NextGen POS System}
+\begin{frame}
+  \frametitle{Case One: The NextGen POS System}
+  \begin{itemize}
+	\item<+-> A POS system is a computerized application used (in part) to record sales and handle payments
+	\item<+-> It interfaces to various service applications
+	\item<+-> These systems must be relatively fault-tolerant
+	\item<+-> Supports various client-side terminals (web / pc / and so on..) 
+	\item<+-> Must be flexible with respect to various clients with disparate needs in terms of business rule processing
+   \end{itemize}
+\end{frame}
+
+\subsection{Case Two: The Monopoly Game System}
+\begin{frame}
+	\frametitle{Case Two: The Monopoly Game System}
+  	\begin{itemize}
+	\item<+-> OOA/D apply to very different problems.. Monopoly game
+	\item<+-> Domain modeling, Object design and UML are still relevant and useful
+	\item<+-> The software version of the game will run as a simulation
+   \end{itemize}
+\end{frame}
+
+\section{Use Cases}
+\subsection{Use Cases}
+\begin{frame}
+	\frametitle{Use Cases:}
+	\begin{itemize}
+	\item<+-> Are text stories used to discover and record requirements
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Example: Process Sale}
+	\begin{center}
+	A customer arrives at a checkout with items to purchase. The cashier uses
+the POS system to record each purchased item. The system presents a running total and
+line-item details. The customer enters payment information, which the system validates and
+records. The system updates inventory. The customer receives a receipt from the system
+and then leaves with the items
+	\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Use Cases:}
+	\begin{itemize}
+	\item<+-> use cases are not diagrams, they are text
+	\item<+-> target is to discover and record functional requirement that satisfy user's needs..
+	\item<+-> ..it's not so simple..!
+	\end{itemize}
+\end{frame}
+
+\subsection{What are Actors, Scenarios, and Use Cases?}
+\begin{frame}
+	\frametitle{What are Actors, Scenarios, and Use Cases?}
+	\begin{itemize}
+	\item<+-> \textbf{Actor:} is something with behavior.. person(role), computer system, ...
+	\item<+-> \textbf{Scenario(use case instance):} specific sequence of actions and interactions between actors and the system, a particular story/path in using the system
+	\item<+-> \textbf{Use case:} is a collection of related success and failure scenarios that describe
+an actor using a system to support a goal 
+	\end{itemize}
+\end{frame}
+
+\subsection{Use Cases and the Use-Case Model}
+\begin{frame}
+	\frametitle{Use Cases and the Use-Case Model}
+	\begin{itemize}
+		\item<+-> use-case modeling is an act of writing text, not drawing diagrams artifacts of systems
+		\item<+-> ..can include \textit{optionally} diagrams
+		\item<+-> There's no OOA/D in use case modeling.. but it's a key concept input to OOA/D
+    \end{itemize}
+\end{frame}
+
+\subsection{Motivation: Why Use Cases?}
+\begin{frame}
+	\frametitle{Motivation: Why Use Cases?}
+	\begin{itemize}
+		\item<+-> Many ways exist to capture/describe goals..
+		\item<+-> But a simpler written text is preferable, because customer can actively participate..  
+		\item<+-> ...and this help in don't missing the point 
+		\item<+-> Lack of user involvement in software projects is near the top of the list of reasons for project failure
+		\item<+-> emphasize the user goals and perspective
+		\item<+-> ...keep it simple (as everything!).. write text stories
+    \end{itemize}
+\end{frame}
+
+\subsection{Definition: Are Use Cases Functional Requirements?} 
+\begin{frame}
+	\frametitle{Definition: Are Use Cases Functional Requirements?}
+	\begin{itemize}
+    \item<+-> Use cases are requirements, primarily functional or behavioral requirements that indicate what
+the system will do
+    \item<+-> define a contract of how a system will behave
+    \end{itemize}
+\end{frame}
+
+\subsection{Definition: What are Three Kinds of Actors?}
+\begin{frame}
+	\frametitle{Three Ways to Apply UML}
+	Various actors can exist in a use case, can be roles like people, orgs, software and machines 
+	\begin{itemize}
+		\item<+-> \textbf{Primary actor:} has user goals fulfilled through using services of the system 
+		\item<+-> \textbf{Supporting actor:} provides a service to the system
+		\item<+-> \textbf{Offstage actor:} has an interest in the behavior of the use case
+    \end{itemize}
+\end{frame}
+
+\end{document}
